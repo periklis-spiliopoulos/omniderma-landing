@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" sizes="32x32" href="omnilogo_32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="omnilogo_192x192.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OmniDerma — Intelligent Dermatology</title>
+  <meta name="description" content="OmniDerma is an AI-assisted dermatology platform for lesion analysis, differential support, patient workflows, and future aesthetic preview tools." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: #0a0a0f;
+      color: #f5f2ec;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      line-height: 1.5;
+      cursor: auto;
+    }
+
+    :root {
+      --bg: #0a0a0f;
+      --bg-alt: #0e0e14;
+      --panel: #11111a;
+      --text: #f5f2ec;
+      --text-soft: rgba(245,242,236,.64);
+      --text-faint: rgba(245,242,236,.42);
+
+      --accent: #7c5cbf;
+      --accent-light: #a688e0;
+      --accent-border: rgba(124,92,191,.28);
+
+      --accent-orange: #e07a35;
+      --accent-orange-light: #f0a060;
+      --accent-orange-border: rgba(224,122,53,.28);
+
+      --accent-green: #3aab6d;
+      --accent-green-light: #5ecf90;
+      --accent-green-border: rgba(58,171,109,.28);
+
+      --accent-pink: #d46fa0;
+      --accent-pink-light: #e89fc0;
+      --accent-pink-border: rgba(212,111,160,.28);
+
+      --container: 1200px;
+      --radius: 24px;
+      --section-pad: 7rem;
+      --nav-pad-x: 4rem;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .26;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      z-index: 0;
+    }
+
+    a, button, input { font: inherit; }
+    img { display: block; max-width: 100%; }
+    section, footer, nav { position: relative; z-index: 1; }
+
+    @media (pointer: fine) {
+      body.cursor-enhanced { cursor: auto; }
+      #cursor-dot, #cursor-ring { display: none; }
+    }
+
+    #cursor-dot, #cursor-ring {
+      display: none !important;
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 1000;
+    }
+    #cursor-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    #cursor-ring {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid rgba(166,136,224,.45);
+      transition: width .18s ease, height .18s ease, opacity .18s ease;
+    }
+
+    .container {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 4rem;
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.12), transparent);
+    }
+
+    nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem var(--nav-pad-x);
+      transition: background .25s ease, border-color .25s ease, backdrop-filter .25s ease;
+      border-bottom: 1px solid transparent;
+      z-index: 20;
+    }
+    nav.scrolled {
+      background: rgba(10,10,15,.82);
+      border-bottom-color: rgba(255,255,255,.08);
+      backdrop-filter: blur(14px);
+    }
+    .nav-brand {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .nav-brand img {
+      height: 72px;
+      width: auto;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+    }
+    .nav-links a {
+      color: var(--text-faint);
+      text-decoration: none;
+      font-size: .78rem;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      transition: color .2s ease;
+    }
+    .nav-links a:hover,
+    .nav-links a:focus-visible { color: var(--text); }
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: .75rem 1.35rem;
+      border: 1px solid var(--accent-border);
+      color: var(--accent-light);
+      background: rgba(124,92,191,.08);
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: .78rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      transition: background .2s ease, border-color .2s ease, transform .15s ease;
+    }
+    .nav-cta:hover,
+    .nav-cta:focus-visible {
+      background: rgba(124,92,191,.14);
+      border-color: rgba(166,136,224,.45);
+      transform: translateY(-1px);
+    }
+
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8.5rem 0 4rem;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, .95fr);
+      gap: 3.5rem;
+      align-items: center;
+    }
+    .hero-logo {
+      width: clamp(420px, 50vw, 680px);
+      margin-bottom: 1.4rem;
+    }
+    .eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: .74rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--accent-light);
+      margin: 0 0 1.25rem;
+    }
+    h1 {
+      margin: 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(3.1rem, 6.8vw, 6.1rem);
+      line-height: .98;
+      letter-spacing: -.02em;
+    }
+    h1 em { color: var(--accent-light); font-style: italic; }
+    .hero-sub {
+      max-width: 590px;
+      margin: 1.5rem 0 0;
+      font-size: 1.06rem;
+      line-height: 1.85;
+      color: var(--text-soft);
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 2.3rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: .95rem 1.5rem;
+      border-radius: 999px;
+      font-size: .82rem;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: transform .15s ease, background .2s ease, border-color .2s ease, color .2s ease;
+    }
+    .btn:hover, .btn:focus-visible { transform: translateY(-1px); }
+    .btn-primary {
+      background: var(--accent);
+      color: #0a0a0f;
+      border: 1px solid var(--accent);
+      font-weight: 500;
+    }
+    .btn-primary:hover, .btn-primary:focus-visible { background: var(--accent-light); border-color: var(--accent-light); }
+    .btn-secondary {
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.03);
+    }
+    .btn-secondary:hover, .btn-secondary:focus-visible { border-color: rgba(255,255,255,.28); background: rgba(255,255,255,.06); }
+
+    .hero-panel {
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 28px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.02)),
+        linear-gradient(135deg, rgba(124,92,191,.06), rgba(124,92,191,.02));
+      padding: 1.4rem;
+    }
+    .hero-panel-inner {
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 22px;
+      padding: 1.5rem;
+      background: rgba(10,10,15,.55);
+    }
+    .panel-kicker {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      color: var(--text-faint);
+      font-size: .72rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-family: 'DM Mono', monospace;
+    }
+    .risk-meter {
+      display: grid;
+      gap: 1rem;
+    }
+    .risk-row {
+      display: grid;
+      gap: .42rem;
+    }
+    .risk-row header {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: .74rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .risk-row header span:last-child {
+      color: var(--accent-light);
+      font-family: 'DM Mono', monospace;
+    }
+    .risk-track {
+      position: relative;
+      height: 5px;
+      background: rgba(255,255,255,.08);
+      overflow: hidden;
+      border-radius: 999px;
+    }
+    .risk-fill {
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 0;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      transition: width 1.05s cubic-bezier(.22,1,.36,1);
+    }
+    .risk-fill.animated { width: var(--w); }
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+    .stat {
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 20px;
+      background: rgba(255,255,255,.02);
+      padding: 1rem 1.05rem;
+    }
+    .stat strong {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.9rem;
+      font-weight: 300;
+      color: var(--accent-light);
+      margin-bottom: .2rem;
+    }
+    .stat span {
+      display: block;
+      font-size: .72rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+    }
+
+    .section {
+      padding: var(--section-pad) 0;
+    }
+    .section-tag {
+      margin: 0 0 .9rem;
+      font-family: 'DM Mono', monospace;
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--accent-light);
+    }
+    .section-title {
+      margin: 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      line-height: 1.04;
+      font-size: clamp(2.35rem, 4.5vw, 4rem);
+    }
+    .section-title em { color: var(--accent-light); font-style: italic; }
+    .section-lead {
+      max-width: 640px;
+      margin: 1.15rem 0 0;
+      color: var(--text-soft);
+      font-size: 1rem;
+      line-height: 1.9;
+    }
+
+    #omnirisk { --accent: #7c5cbf; --accent-light: #a688e0; --accent-border: rgba(124,92,191,.28); }
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
+      gap: 3.2rem;
+      align-items: start;
+      margin-top: 3.5rem;
+    }
+    .panel {
+      border: 1px solid var(--accent-border);
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      border-radius: 28px;
+      padding: 1.4rem;
+    }
+    .panel.inset {
+      background: linear-gradient(135deg, rgba(124,92,191,.05), rgba(124,92,191,.01));
+    }
+    .feature-stack {
+      display: grid;
+      gap: 1rem;
+    }
+    .feature-card {
+      border: 1px solid var(--accent-border);
+      border-radius: 22px;
+      padding: 1.45rem;
+      background: rgba(255,255,255,.02);
+      transition: border-color .2s ease, transform .15s ease, background .2s ease;
+    }
+    .feature-card:hover {
+      border-color: rgba(255,255,255,.18);
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.03);
+    }
+    .feature-card h3 {
+      margin: 0 0 .45rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.42rem;
+      font-weight: 400;
+    }
+    .feature-card p {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: .92rem;
+      line-height: 1.78;
+    }
+
+    #features { --accent: #e07a35; --accent-light: #f0a060; --accent-border: rgba(224,122,53,.28); background: var(--bg-alt); }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.1rem;
+      margin-top: 3.2rem;
+    }
+    .feat-card {
+      --card-accent: var(--accent);
+      --card-accent-light: var(--accent-light);
+      --card-border: var(--accent-border);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 2rem 1.6rem;
+      background: rgba(255,255,255,.02);
+      position: relative;
+      overflow: hidden;
+      min-height: 240px;
+      transition: transform .15s ease, border-color .2s ease, background .2s ease;
+    }
+    .feat-card:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,.04);
+      border-color: rgba(255,255,255,.18);
+    }
+    .feat-card::after {
+      content: '';
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--card-accent), transparent);
+      opacity: .9;
+    }
+    .feat-card--green {
+      --card-accent: var(--accent-green);
+      --card-accent-light: var(--accent-green-light);
+      --card-border: var(--accent-green-border);
+    }
+    .feat-kicker {
+      margin: 0 0 1rem;
+      color: var(--card-accent-light);
+      font-family: 'DM Mono', monospace;
+      font-size: .68rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .feat-card h3 {
+      margin: 0 0 .6rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 400;
+    }
+    .feat-card p {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: .9rem;
+      line-height: 1.75;
+    }
+
+    #aesthetica {
+      --accent: #d46fa0;
+      --accent-light: #e89fc0;
+      --accent-border: rgba(212,111,160,.28);
+      background: #101019;
+    }
+    .aest-logo {
+      width: clamp(360px, 46vw, 620px);
+      margin-bottom: 1.2rem;
+    }
+    .aest-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 1.1rem;
+      margin-top: 3rem;
+    }
+    .aest-card {
+      border: 1px solid var(--accent-border);
+      border-radius: 24px;
+      padding: 1.8rem;
+      background: rgba(212,111,160,.04);
+      transition: transform .15s ease, border-color .2s ease;
+    }
+    .aest-card:hover {
+      transform: translateY(-1px);
+      border-color: rgba(232,159,192,.42);
+    }
+    .aest-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .8rem;
+      margin-top: 2.1rem;
+      padding: 1rem 1.25rem;
+      border-radius: 999px;
+      border: 1px solid var(--accent-border);
+      background: rgba(212,111,160,.06);
+      color: var(--text-soft);
+      font-family: 'DM Mono', monospace;
+      font-size: .74rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .aest-badge::before {
+      content: '';
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: inline-block;
+    }
+
+    #workflow { --accent: #7c5cbf; --accent-light: #a688e0; --accent-border: rgba(124,92,191,.28); }
+    .workflow-steps {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+    .workflow-step {
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 24px;
+      padding: 1.5rem 1.25rem;
+      background: rgba(255,255,255,.02);
+    }
+    .step-num {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      border: 1px solid var(--accent-border);
+      color: var(--accent-light);
+      background: rgba(124,92,191,.08);
+      font-family: 'DM Mono', monospace;
+      font-size: .86rem;
+      letter-spacing: .08em;
+    }
+    .workflow-step h4 {
+      margin: 0 0 .5rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.28rem;
+      font-weight: 400;
+    }
+    .workflow-step p {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: .9rem;
+      line-height: 1.72;
+    }
+
+    #contact {
+      --accent: #7c5cbf; --accent-light: #a688e0; --accent-border: rgba(124,92,191,.28);
+      background: linear-gradient(180deg, #0e0e14 0%, #0a0a0f 100%);
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
+    .cta-box {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .cta-form {
+      display: flex;
+      gap: .9rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+    .cta-form input {
+      width: min(380px, 100%);
+      min-height: 50px;
+      padding: .95rem 1.15rem;
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 999px;
+      color: var(--text);
+      outline: none;
+    }
+    .cta-form input::placeholder { color: rgba(245,242,236,.34); }
+    .cta-form input:focus {
+      border-color: var(--accent-border);
+      background: rgba(255,255,255,.05);
+    }
+    .cta-note {
+      margin-top: 1rem;
+      color: var(--text-faint);
+      font-size: .86rem;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 2rem 4rem 2.5rem;
+      border-top: 1px solid rgba(255,255,255,.06);
+      color: var(--text-faint);
+      font-size: .8rem;
+    }
+    .footer-brand img {
+      height: 74px;
+      width: auto;
+      opacity: .82;
+    }
+    .footer-meta {
+      font-family: 'DM Mono', monospace;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: .68rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    a:focus-visible, button:focus-visible, input:focus-visible {
+      outline: 2px solid var(--accent-light);
+      outline-offset: 3px;
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid, .split { grid-template-columns: 1fr; }
+      .hero-panel { order: 2; }
+      .features-grid, .aest-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .workflow-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 900px) {
+      :root { --section-pad: 5rem; --nav-pad-x: 1.2rem; }
+      .container { padding: 0 1.2rem; }
+      nav { padding: 1rem 1.2rem; }
+      .nav-links { display: none; }
+      .nav-brand img { height: 76px; }
+      .hero-logo { width: min(92vw, 560px); }
+      .aest-logo { width: min(88vw, 520px); }
+      .hero-stats { grid-template-columns: 1fr; }
+      .features-grid, .aest-grid, .workflow-steps { grid-template-columns: 1fr; }
+      .cta-form { flex-direction: column; align-items: center; }
+      footer {
+        flex-direction: column;
+        text-align: center;
+        padding-left: 1.2rem;
+        padding-right: 1.2rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+    <nav id="nav">
+    <a href="#hero" class="nav-brand" aria-label="OmniDerma home">
+      <img src="omniderma-logo.png" alt="OmniDerma logo" />
+    </a>
+    <ul class="nav-links" aria-label="Primary">
+      <li><a href="#omnirisk">OmniRisk</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#aesthetica">Aesthetica</a></li>
+      <li><a href="#workflow">How it works</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Request Demo</a>
+  </nav>
+
+  <section id="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <img class="hero-logo reveal visible" src="omniderma-logo.png" alt="OmniDerma" />
+        <p class="eyebrow reveal visible">AI-assisted dermatology platform</p>
+        <h1 class="reveal visible">Clinical insight with<br><em>real-world</em><br>dermatology focus.</h1>
+        <p class="hero-sub reveal visible">OmniDerma brings structured AI support to dermatologic practice — helping clinicians analyse lesions, organize differentials, stratify risk, and document care more clearly.</p>
+        <div class="hero-actions reveal visible">
+          <a href="#contact" class="btn btn-primary">Request a Demo</a>
+          <a href="#features" class="btn btn-secondary">Explore Features</a>
+        </div>
+      </div>
+
+    
+
+      <aside class="hero-panel reveal visible" aria-label="Illustrative clinical preview">
+        <div class="hero-panel-inner">
+          <div class="panel-kicker">
+            <span>Illustrative workflow</span>
+            <span>Clinician-facing</span>
+          </div>
+          <div class="risk-meter">
+            <div class="risk-row">
+              <header><span>Cutaneous Lupus</span><span>82%</span></header>
+              <div class="risk-track"><div class="risk-fill" style="--w:82%"></div></div>
+            </div>
+            <div class="risk-row">
+              <header><span>Dermatomyositis</span><span>68%</span></header>
+              <div class="risk-track"><div class="risk-fill" style="--w:68%"></div></div>
+            </div>
+            <div class="risk-row">
+              <header><span>Morphea</span><span>47%</span></header>
+              <div class="risk-track"><div class="risk-fill" style="--w:47%"></div></div>
+            </div>
+            <div class="risk-row">
+              <header><span>Vitiligo</span><span>39%</span></header>
+              <div class="risk-track"><div class="risk-fill" style="--w:39%"></div></div>
+            </div>
+            <div class="risk-row">
+              <header><span>Bullous Pemphigoid</span><span>24%</span></header>
+              <div class="risk-track"><div class="risk-fill" style="--w:24%"></div></div>
+            </div>
+          </div>
+          <div class="hero-stats">
+            <div class="stat"><strong>Multiple</strong><span>Disease Categories</span></div>
+            <div class="stat"><strong>AI</strong><span>Probability engine</span></div>
+            <div class="stat"><strong>∞</strong><span>Follow-up Potential</span></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="omnirisk" class="section">
+    <div class="container">
+      <p class="section-tag reveal">Flagship module</p>
+      <h2 class="section-title reveal">Meet <em>OmniRisk</em> — intelligent lesion risk support.</h2>
+      <p class="section-lead reveal">A clinician-facing engine designed to turn dermatologic images and clinical context into structured probability estimates, practical differential suggestions, and more consistent case review.</p>
+
+      <div class="split">
+        <div class="panel inset reveal">
+          <div class="hero-panel-inner">
+            <div class="panel-kicker">
+              <span>Sample outputs</span>
+              <span>Structured review</span>
+            </div>
+            <div class="risk-meter">
+              <div class="risk-row">
+                <header><span>Suspicion index</span><span>High</span></header>
+                <div class="risk-track"><div class="risk-fill" style="--w:78%"></div></div>
+              </div>
+              <div class="risk-row">
+                <header><span>Confidence interval</span><span>64–86%</span></header>
+                <div class="risk-track"><div class="risk-fill" style="--w:64%"></div></div>
+              </div>
+              <div class="risk-row">
+                <header><span>Derm differential</span><span>Ranked</span></header>
+                <div class="risk-track"><div class="risk-fill" style="--w:70%"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-stack">
+          <article class="feature-card reveal">
+            <h3>Probability-driven risk support</h3>
+            <p>Go beyond generic AI summaries with outputs shaped around confidence ranges, lesion risk framing, and structured clinical review.</p>
+          </article>
+          <article class="feature-card reveal">
+            <h3>Differentials with context</h3>
+            <p>Combine image interpretation with symptoms, medications, timing, and patient history to generate more useful differential guidance.</p>
+          </article>
+          <article class="feature-card reveal">
+            <h3>Built for workflow, not spectacle</h3>
+            <p>Clear sections, readable output, and clinician-oriented structure keep the tool practical instead of flashy for its own sake.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="features" class="section">
+    <div class="container">
+      <p class="section-tag reveal">Core platform</p>
+      <h2 class="section-title reveal">A broader dermatology platform,<br>not just one <em>single trick.</em></h2>
+      <p class="section-lead reveal">OmniDerma is built as a system of clinician tools — from lesion analysis and differential support to emergency workflows and future patient-facing modules.</p>
+
+      <div class="features-grid">
+        <article class="feat-card reveal">
+          <p class="feat-kicker">Image review</p>
+          <h3>Lesion Analysis</h3>
+          <p>Supports suspicious or complex lesion workflows with image-based review designed for real clinical use.</p>
+        </article>
+        <article class="feat-card reveal">
+          <p class="feat-kicker">Decision support</p>
+          <h3>Differential Guidance</h3>
+          <p>Structured differentials help organize diagnostic thinking without pretending to replace physician judgment.</p>
+        </article>
+        <article class="feat-card reveal">
+          <p class="feat-kicker">Acute care</p>
+          <h3>Emergency Dermatology</h3>
+          <p>Helps frame high-stakes dermatologic presentations with focused, practical, clinician-readable output.</p>
+        </article>
+        <article class="feat-card feat-card--green reveal">
+          <p class="feat-kicker">Documentation</p>
+          <h3>Structured Output</h3>
+          <p>Information is returned in a format meant to be reviewed quickly, communicated clearly, and stored efficiently.</p>
+        </article>
+        <article class="feat-card feat-card--green reveal">
+          <p class="feat-kicker">Follow-up</p>
+          <h3>Longitudinal Comparison</h3>
+          <p>Future-facing workflow for comparing visits over time, supporting progression review and treatment response tracking.</p>
+        </article>
+        <article class="feat-card feat-card--green reveal">
+          <p class="feat-kicker">Practice utility</p>
+          <h3>Clinician-first Design</h3>
+          <p>Built around what actually matters in practice: speed, clarity, consistency, and useful structure.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="aesthetica" class="section">
+    <div class="container">
+      <img class="aest-logo reveal" src="omniderma-aesthetica-logo.png" alt="OmniDerma Aesthetica logo" />
+      <p class="section-tag reveal" style="color: var(--accent-light);">In development</p>
+      <h2 class="section-title reveal">Introducing <em>OmniDerma Aesthetica</em></h2>
+      <p class="section-lead reveal">A future extension focused on aesthetic consultation support — helping patients visualize realistic expectations before treatment and helping practices communicate outcomes more clearly.</p>
+
+      <div class="aest-grid">
+        <article class="aest-card reveal">
+          <p class="feat-kicker" style="color: var(--accent-light);">Procedure preview</p>
+          <h3>Before &amp; After Simulation</h3>
+          <p>AI-generated visual previews can help frame likely outcomes from selected aesthetic procedures before the first session.</p>
+        </article>
+        <article class="aest-card reveal">
+          <p class="feat-kicker" style="color: var(--accent-light);">Patient education</p>
+          <h3>Visual Informed Consent</h3>
+          <p>Replace vague mental images with a clearer visual conversation around realistic expectations and treatment goals.</p>
+        </article>
+        <article class="aest-card reveal">
+          <p class="feat-kicker" style="color: var(--accent-light);">Practice value</p>
+          <h3>Clearer Consultations</h3>
+          <p>Better expectation-setting can improve trust, reduce ambiguity, and make aesthetic consultations more productive.</p>
+        </article>
+      </div>
+
+      <div class="aest-badge reveal">Currently in development — inquire for early access</div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="workflow" class="section">
+    <div class="container">
+      <p class="section-tag reveal">How it works</p>
+      <h2 class="section-title reveal">From image to insight<br>in <em>seconds.</em></h2>
+
+      <div class="workflow-steps">
+        <article class="workflow-step reveal">
+          <div class="step-num">01</div>
+          <h4>Upload image</h4>
+          <p>Capture or upload a high-quality photo directly inside the platform.</p>
+        </article>
+        <article class="workflow-step reveal">
+          <div class="step-num">02</div>
+          <h4>Add context</h4>
+          <p>Enter symptoms, duration, medication history, and other clinically useful details.</p>
+        </article>
+        <article class="workflow-step reveal">
+          <div class="step-num">03</div>
+          <h4>Run analysis</h4>
+          <p>OmniDerma processes visual and contextual information into structured support output.</p>
+        </article>
+        <article class="workflow-step reveal">
+          <div class="step-num">04</div>
+          <h4>Review &amp; document</h4>
+          <p>Interpret the results in clinical context, compare over time, and save the case workflow.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="cta-box">
+        <p class="section-tag reveal" style="text-align:center;">Get in touch</p>
+        <h2 class="section-title reveal">Interested in a demo,<br><em>partnership, or collaboration?</em></h2>
+        <p class="section-lead reveal" style="margin-left:auto;margin-right:auto;text-align:center;">Whether you are a clinician, practice, health system, collaborator, or investor, we would be glad to show you what OmniDerma is building.</p>
+        <form class="cta-form reveal" onsubmit="handleSubmit(event)">
+          <input type="email" id="email" placeholder="Your email address" aria-label="Your email address" required />
+          <button class="btn btn-primary" type="submit">Request Demo</button>
+        </form>
+        <p class="cta-note reveal">This demo form currently opens your email app so you can contact the team directly.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="disclaimer" class="section" style="padding-top:3rem;padding-bottom:3rem;">
+  <div class="container">
+    <div style="
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 20px;
+      padding: 1.6rem;
+      background: rgba(255,255,255,.02);
+      max-width: 900px;
+      margin: 0 auto;
+    ">
+      <p style="
+        font-family: 'DM Mono', monospace;
+        font-size: .72rem;
+        letter-spacing: .18em;
+        text-transform: uppercase;
+        color: var(--text-faint);
+        margin-bottom: 1rem;
+      ">
+        Medical Disclaimer
+      </p>
+
+      <p style="color: var(--text-soft); font-size: .9rem; line-height: 1.8;">
+        OmniDerma is an AI-assisted clinical support tool intended for training and educational purposes only.
+        The platform does not provide medical diagnosis and must not be used as a standalone diagnostic system.
+        All outputs require interpretation by qualified medical professionals.
+      </p>
+
+      <p style="color: var(--text-soft); font-size: .9rem; line-height: 1.8; margin-top: .8rem;">
+        The gold standard for the evaluation of skin neoplasms remains clinical assessment followed by excision
+        and histopathological examination where indicated.
+      </p>
+
+      <p style="color: var(--text-soft); font-size: .9rem; line-height: 1.8; margin-top: .8rem;">
+        AI-generated analyses may be inaccurate or incomplete. Clinical decisions must always be based on
+        current medical guidelines, physician judgment, and individual patient context.
+      </p>
+    </div>
+  </div>
+</section>
+
+  <footer>
+    <div class="footer-brand">
+      <img src="omniderma-logo.png" alt="OmniDerma footer logo" />
+    </div>
+    <div>© 2026 OmniDerma. All rights reserved.</div>
+    <div class="footer-meta">AI-assisted · physician-led</div>
+  </footer>
+
+  <script>
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 24);
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          if (entry.target.querySelectorAll) {
+            entry.target.querySelectorAll('.risk-fill').forEach(bar => bar.classList.add('animated'));
+          }
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal, .hero-panel, .panel').forEach(el => observer.observe(el));
+
+    document.querySelectorAll('.risk-fill').forEach((bar, idx) => {
+      setTimeout(() => bar.classList.add('animated'), 250 + idx * 120);
+    });
+
+    function handleSubmit(event) {
+      event.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const subject = encodeURIComponent('OmniDerma Demo Request');
+      const body = encodeURIComponent(`Hello,\n\nI am interested in learning more about OmniDerma.\n\nMy email: ${email}\n\nBest regards,`);
+      window.location.href = `mailto:info@omniderma.health?subject=${subject}&body=${body}`;
+    }
+  </script>
+</body>
+</html>
