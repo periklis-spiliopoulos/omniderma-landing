@@ -5,8 +5,8 @@
   <link rel="icon" type="image/png" sizes="192x192" href="omnilogo_192x192.png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>OmniDerma — Intelligent Dermatology</title>
-  <meta name="description" content="OmniDerma is an AI-assisted dermatology platform for lesion analysis, differential support, patient workflows, and future aesthetic preview tools." />
+  <title>OmniDerma — Dermatology, Faster</title>
+  <meta name="description" content="OmniDerma is a physician-led dermatology platform that helps clinicians assess lesions, organize differentials, document cases, and save time in daily practice." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
@@ -598,6 +598,64 @@
       font-size: .86rem;
     }
 
+
+    .screenshot-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+      align-items: start;
+    }
+    .screenshot {
+      width: 100%;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.08);
+      cursor: pointer;
+      transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+      background: rgba(255,255,255,.02);
+      box-shadow: 0 10px 24px rgba(0,0,0,.18);
+    }
+    .screenshot:hover,
+    .screenshot:focus-visible {
+      transform: translateY(-2px) scale(1.01);
+      border-color: rgba(255,255,255,.18);
+      box-shadow: 0 16px 38px rgba(0,0,0,.28);
+    }
+
+    .image-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0,0,0,.9);
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+    .image-modal.open {
+      display: flex;
+    }
+    .image-modal img {
+      max-width: min(1100px, 92vw);
+      max-height: 88vh;
+      width: auto;
+      height: auto;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 20px 60px rgba(0,0,0,.45);
+      background: #111;
+    }
+    .image-modal .close {
+      position: absolute;
+      top: 20px;
+      right: 28px;
+      font-size: 42px;
+      line-height: 1;
+      color: white;
+      cursor: pointer;
+      user-select: none;
+    }
+
     footer {
       display: flex;
       justify-content: space-between;
@@ -651,7 +709,7 @@
       .hero-logo { width: min(92vw, 560px); }
       .aest-logo { width: min(88vw, 520px); }
       .hero-stats { grid-template-columns: 1fr; }
-      .features-grid, .aest-grid, .workflow-steps { grid-template-columns: 1fr; }
+      .features-grid, .aest-grid, .workflow-steps, .screenshot-grid { grid-template-columns: 1fr; }
       .cta-form { flex-direction: column; align-items: center; }
       footer {
         flex-direction: column;
@@ -680,9 +738,9 @@
       <img src="omniderma-logo.png" alt="OmniDerma logo" />
     </a>
     <ul class="nav-links" aria-label="Primary">
+      <li><a href="#preview">In Practice</a></li>
       <li><a href="#omnirisk">OmniRisk</a></li>
       <li><a href="#features">Features</a></li>
-      <li><a href="#aesthetica">Aesthetica</a></li>
       <li><a href="#workflow">How it works</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -693,9 +751,19 @@
     <div class="container hero-grid">
       <div class="hero-copy">
         <img class="hero-logo reveal visible" src="omniderma-logo.png" alt="OmniDerma" />
-        <p class="eyebrow reveal visible">AI-assisted dermatology platform</p>
-        <h1 class="reveal visible">Clinical insight with<br><em>real-world</em><br>dermatology focus.</h1>
-        <p class="hero-sub reveal visible">OmniDerma brings structured AI support to dermatologic practice — helping clinicians analyse lesions, organize differentials, stratify risk, and document care more clearly.</p>
+        <p class="eyebrow reveal visible">Physician-led dermatology workflow platform</p>
+        <h1 class="reveal visible">
+  Less time thinking.<em> More time deciding.</em>
+</h1>
+
+<p class="hero-sub reveal visible">
+  Review lesions, organize differentials, and document cases in one place — without losing time between image, impression, and next step.
+</p>
+
+<p class="hero-sub reveal visible" style="font-size:.9rem; color:var(--text-faint);">
+  Built by a physician for real clinical workflow — not generic AI theatre.
+  Designed to reduce friction during real clinic time — not after it.
+</p>
         <div class="hero-actions reveal visible">
           <a href="#contact" class="btn btn-primary">Request a Demo</a>
           <a href="#features" class="btn btn-secondary">Explore Features</a>
@@ -704,132 +772,111 @@
 
     
 
-      <aside class="hero-panel reveal visible" aria-label="Illustrative clinical preview">
-        <div class="hero-panel-inner">
-          <div class="panel-kicker">
-            <span>Illustrative workflow</span>
-            <span>Clinician-facing</span>
-          </div>
-          <div class="risk-meter">
-            <div class="risk-row">
-              <header><span>Cutaneous Lupus</span><span>82%</span></header>
-              <div class="risk-track"><div class="risk-fill" style="--w:82%"></div></div>
-            </div>
-            <div class="risk-row">
-              <header><span>Dermatomyositis</span><span>68%</span></header>
-              <div class="risk-track"><div class="risk-fill" style="--w:68%"></div></div>
-            </div>
-            <div class="risk-row">
-              <header><span>Morphea</span><span>47%</span></header>
-              <div class="risk-track"><div class="risk-fill" style="--w:47%"></div></div>
-            </div>
-            <div class="risk-row">
-              <header><span>Vitiligo</span><span>39%</span></header>
-              <div class="risk-track"><div class="risk-fill" style="--w:39%"></div></div>
-            </div>
-            <div class="risk-row">
-              <header><span>Bullous Pemphigoid</span><span>24%</span></header>
-              <div class="risk-track"><div class="risk-fill" style="--w:24%"></div></div>
-            </div>
-          </div>
-          <div class="hero-stats">
-            <div class="stat"><strong>Multiple</strong><span>Disease Categories</span></div>
-            <div class="stat"><strong>AI</strong><span>Probability engine</span></div>
-            <div class="stat"><strong>∞</strong><span>Follow-up Potential</span></div>
-          </div>
-        </div>
-      </aside>
+      <aside class="hero-panel reveal visible">
+  <img src="screenshot-main.png" alt="OmniDerma AI analysis output" style="border-radius:16px;">
+</aside>
     </div>
   </section>
 
   <div class="divider"></div>
 
+<section id="preview" class="section">  <div class="container">
+    <p class="section-tag">Product Preview</p>
+    <h2 class="section-title">
+      See OmniDerma <em>in action</em>
+    </h2>
+    <p class="section-lead">
+      Real outputs from the platform — clear, practical, and made to be reviewed quickly.
+    </p>
+
+    <p style="color:var(--text-faint); font-size:.85rem; margin-top:1rem;">Click any image to expand</p>
+
+    <div class="screenshot-grid">
+      <img src="screenshot-main.png" class="screenshot" alt="OmniDerma lesion analysis screenshot">
+      <img src="screenshot-patient.png" class="screenshot" alt="OmniDerma patient workflow screenshot">
+      <img src="screenshot-followup.png" class="screenshot" alt="OmniDerma follow-up comparison screenshot">
+    </div>
+
+    <p style="margin-top:1.2rem; color:var(--text-faint); font-size:.9rem;">
+      From image to assessment to documentation, without bouncing between tools.
+    </p>
+  </div>
+</section>
+
   <section id="omnirisk" class="section">
     <div class="container">
       <p class="section-tag reveal">Flagship module</p>
-      <h2 class="section-title reveal">Meet <em>OmniRisk</em> — intelligent lesion risk support.</h2>
-      <p class="section-lead reveal">A clinician-facing engine designed to turn dermatologic images and clinical context into structured probability estimates, practical differential suggestions, and more consistent case review.</p>
+      <h2 class="section-title reveal">Meet <em>OmniRisk</em> — lesion assessment that actually fits clinical workflow.</h2>
+      <p class="section-lead reveal">A clinician-guided assessment tool that combines image analysis with a growing real-world case database, helping you reach a structured, usable impression faster.</p>
 
       <div class="split">
         <div class="panel inset reveal">
-          <div class="hero-panel-inner">
-            <div class="panel-kicker">
-              <span>Sample outputs</span>
-              <span>Structured review</span>
-            </div>
-            <div class="risk-meter">
-              <div class="risk-row">
-                <header><span>Suspicion index</span><span>High</span></header>
-                <div class="risk-track"><div class="risk-fill" style="--w:78%"></div></div>
-              </div>
-              <div class="risk-row">
-                <header><span>Confidence interval</span><span>64–86%</span></header>
-                <div class="risk-track"><div class="risk-fill" style="--w:64%"></div></div>
-              </div>
-              <div class="risk-row">
-                <header><span>Derm differential</span><span>Ranked</span></header>
-                <div class="risk-track"><div class="risk-fill" style="--w:70%"></div></div>
-              </div>
-            </div>
-          </div>
+          <img src="screenshot-omnirisk.png" 
+               alt="OmniRisk clinical output"
+               class="screenshot">
         </div>
 
         <div class="feature-stack">
           <article class="feature-card reveal">
-            <h3>Probability-driven risk support</h3>
-            <p>Go beyond generic AI summaries with outputs shaped around confidence ranges, lesion risk framing, and structured clinical review.</p>
+            <h3>Structured risk support</h3>
+            <p>Get a readable risk estimate, confidence range, and a result that is easy to review quickly during a busy clinic day.</p>
           </article>
           <article class="feature-card reveal">
-            <h3>Differentials with context</h3>
-            <p>Combine image interpretation with symptoms, medications, timing, and patient history to generate more useful differential guidance.</p>
+            <h3>Differentials that use context</h3>
+            <p>Bring the image together with symptoms, timing, medications, and history so the output feels closer to how dermatologists actually think.</p>
           </article>
           <article class="feature-card reveal">
-            <h3>Built for workflow, not spectacle</h3>
-            <p>Clear sections, readable output, and clinician-oriented structure keep the tool practical instead of flashy for its own sake.</p>
-          </article>
+  <h3>Grounded in real cases</h3>
+  <p>
+    OmniRisk is not meant to stay frozen as a generic model. It is built on a curated clinical case database, so results become more aligned with real dermatology over time.
+  </p>
+</article>
         </div>
       </div>
     </div>
   </section>
+  
 
   <div class="divider"></div>
 
   <section id="features" class="section">
     <div class="container">
       <p class="section-tag reveal">Core platform</p>
-      <h2 class="section-title reveal">A broader dermatology platform,<br>not just one <em>single trick.</em></h2>
-      <p class="section-lead reveal">OmniDerma is built as a system of clinician tools — from lesion analysis and differential support to emergency workflows and future patient-facing modules.</p>
+      <h2 class="section-title">
+  More than lesion analysis — a <em>faster dermatology workflow.</em>
+</h2>
+      <p class="section-lead reveal">OmniDerma is built to cut wasted time across the visit — from lesion assessment and differential support to documentation and follow-up review.</p>
 
       <div class="features-grid">
         <article class="feat-card reveal">
           <p class="feat-kicker">Image review</p>
           <h3>Lesion Analysis</h3>
-          <p>Supports suspicious or complex lesion workflows with image-based review designed for real clinical use.</p>
+          <p>Helps you assess suspicious or complex lesions quickly, without losing the structure needed for careful review.</p>
         </article>
         <article class="feat-card reveal">
           <p class="feat-kicker">Decision support</p>
           <h3>Differential Guidance</h3>
-          <p>Structured differentials help organize diagnostic thinking without pretending to replace physician judgment.</p>
+          <p>Organizes the differential into something usable at a glance, while keeping physician judgment at the center.</p>
         </article>
         <article class="feat-card reveal">
           <p class="feat-kicker">Acute care</p>
           <h3>Emergency Dermatology</h3>
-          <p>Helps frame high-stakes dermatologic presentations with focused, practical, clinician-readable output.</p>
+          <p>Frames urgent dermatologic presentations with focused, practical output that can be reviewed fast when time matters.</p>
         </article>
         <article class="feat-card feat-card--green reveal">
           <p class="feat-kicker">Documentation</p>
           <h3>Structured Output</h3>
-          <p>Information is returned in a format meant to be reviewed quickly, communicated clearly, and stored efficiently.</p>
+          <p>Returns information in a format that is faster to read, easier to communicate, and easier to save.</p>
         </article>
         <article class="feat-card feat-card--green reveal">
           <p class="feat-kicker">Follow-up</p>
           <h3>Longitudinal Comparison</h3>
-          <p>Future-facing workflow for comparing visits over time, supporting progression review and treatment response tracking.</p>
+          <p>Supports before-and-after review so changes over time are easier to judge and treatment response is easier to follow.</p>
         </article>
         <article class="feat-card feat-card--green reveal">
           <p class="feat-kicker">Practice utility</p>
           <h3>Clinician-first Design</h3>
-          <p>Built around what actually matters in practice: speed, clarity, consistency, and useful structure.</p>
+          <p>Built around what matters in practice: saving time, reducing friction, and keeping the output clinically useful.</p>
         </article>
       </div>
     </div>
@@ -837,62 +884,33 @@
 
   <div class="divider"></div>
 
-  <section id="aesthetica" class="section">
-    <div class="container">
-      <img class="aest-logo reveal" src="omniderma-aesthetica-logo.png" alt="OmniDerma Aesthetica logo" />
-      <p class="section-tag reveal" style="color: var(--accent-light);">In development</p>
-      <h2 class="section-title reveal">Introducing <em>OmniDerma Aesthetica</em></h2>
-      <p class="section-lead reveal">A future extension focused on aesthetic consultation support — helping patients visualize realistic expectations before treatment and helping practices communicate outcomes more clearly.</p>
-
-      <div class="aest-grid">
-        <article class="aest-card reveal">
-          <p class="feat-kicker" style="color: var(--accent-light);">Procedure preview</p>
-          <h3>Before &amp; After Simulation</h3>
-          <p>AI-generated visual previews can help frame likely outcomes from selected aesthetic procedures before the first session.</p>
-        </article>
-        <article class="aest-card reveal">
-          <p class="feat-kicker" style="color: var(--accent-light);">Patient education</p>
-          <h3>Visual Informed Consent</h3>
-          <p>Replace vague mental images with a clearer visual conversation around realistic expectations and treatment goals.</p>
-        </article>
-        <article class="aest-card reveal">
-          <p class="feat-kicker" style="color: var(--accent-light);">Practice value</p>
-          <h3>Clearer Consultations</h3>
-          <p>Better expectation-setting can improve trust, reduce ambiguity, and make aesthetic consultations more productive.</p>
-        </article>
-      </div>
-
-      <div class="aest-badge reveal">Currently in development — inquire for early access</div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
+  
 
   <section id="workflow" class="section">
     <div class="container">
       <p class="section-tag reveal">How it works</p>
-      <h2 class="section-title reveal">From image to insight<br>in <em>seconds.</em></h2>
+      <h2 class="section-title reveal">From image to next step<br>in <em>seconds.</em></h2>
 
       <div class="workflow-steps">
         <article class="workflow-step reveal">
           <div class="step-num">01</div>
           <h4>Upload image</h4>
-          <p>Capture or upload a high-quality photo directly inside the platform.</p>
+          <p>Capture or upload a clinical or dermoscopic image directly inside the platform.</p>
         </article>
         <article class="workflow-step reveal">
           <div class="step-num">02</div>
           <h4>Add context</h4>
-          <p>Enter symptoms, duration, medication history, and other clinically useful details.</p>
+          <p>Add the clinical details that matter, so the analysis does not lose the real-world context.</p>
         </article>
         <article class="workflow-step reveal">
           <div class="step-num">03</div>
           <h4>Run analysis</h4>
-          <p>OmniDerma processes visual and contextual information into structured support output.</p>
+          <p>OmniDerma turns the image and history into structured output you can review quickly.</p>
         </article>
         <article class="workflow-step reveal">
           <div class="step-num">04</div>
           <h4>Review &amp; document</h4>
-          <p>Interpret the results in clinical context, compare over time, and save the case workflow.</p>
+          <p>Review, document, and move on — without wasting time rewriting or reorganizing the case.</p>
         </article>
       </div>
     </div>
@@ -905,13 +923,17 @@
       <div class="cta-box">
         <p class="section-tag reveal" style="text-align:center;">Get in touch</p>
         <h2 class="section-title reveal">Interested in a demo,<br><em>partnership, or collaboration?</em></h2>
-        <p class="section-lead reveal" style="margin-left:auto;margin-right:auto;text-align:center;">Whether you are a clinician, practice, health system, collaborator, or investor, we would be glad to show you what OmniDerma is building.</p>
-        <form class="cta-form reveal" onsubmit="handleSubmit(event)">
-          <input type="email" id="email" placeholder="Your email address" aria-label="Your email address" required />
-          <button class="btn btn-primary" type="submit">Request Demo</button>
-        </form>
-        <p class="cta-note reveal">This demo form currently opens your email app so you can contact the team directly.</p>
-      </div>
+        <p class="section-lead reveal" style="margin-left:auto;margin-right:auto;text-align:center;">Whether you are a clinician, practice, health system, collaborator, or investor, we would be glad to show you how OmniDerma can fit into real dermatology workflow.</p>
+        <div class="cta-form reveal">
+  <a href="mailto:info@omniderma.health" class="btn btn-primary">
+    Request a Demo
+  </a>
+</div>
+
+<p class="cta-note reveal">
+  Opens your email to contact the team directly.
+</p>
+              </div>
     </div>
   </section>
 
@@ -937,7 +959,7 @@
       </p>
 
       <p style="color: var(--text-soft); font-size: .9rem; line-height: 1.8;">
-        OmniDerma is an AI-assisted clinical support tool intended for training and educational purposes only.
+        OmniDerma is a physician-led, AI-assisted clinical support tool intended for training and educational purposes only.
         The platform does not provide medical diagnosis and must not be used as a standalone diagnostic system.
         All outputs require interpretation by qualified medical professionals.
       </p>
@@ -963,6 +985,12 @@
     <div class="footer-meta">AI-assisted · physician-led</div>
   </footer>
 
+
+  <div id="image-modal" class="image-modal" aria-hidden="true">
+    <span class="close" aria-label="Close image preview">&times;</span>
+    <img class="modal-content" id="modal-img" alt="Expanded OmniDerma screenshot" />
+  </div>
+
   <script>
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -986,6 +1014,42 @@
 
     document.querySelectorAll('.risk-fill').forEach((bar, idx) => {
       setTimeout(() => bar.classList.add('animated'), 250 + idx * 120);
+    });
+
+
+    const modal = document.getElementById('image-modal');
+    const modalImg = document.getElementById('modal-img');
+    const modalClose = document.querySelector('.image-modal .close');
+
+    document.querySelectorAll('.screenshot').forEach(img => {
+      img.addEventListener('click', () => {
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        modalImg.src = img.src;
+        modalImg.alt = img.alt || 'Expanded OmniDerma screenshot';
+      });
+    });
+
+    modalClose.addEventListener('click', () => {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      modalImg.src = '';
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        modalImg.src = '';
+      }
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('open')) {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        modalImg.src = '';
+      }
     });
 
     function handleSubmit(event) {
