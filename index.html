@@ -23,6 +23,25 @@
       line-height: 1.5;
       cursor: auto;
     }
+ .screenshot-caption {
+  margin-top: .8rem;
+  text-align: center;
+  font-family: 'DM Mono', monospace;
+  font-size: .72rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.screenshot-caption.highlight {
+  display: inline-block;
+  margin-top: .9rem;
+  padding: .4rem .75rem;
+  border-radius: 999px;
+  border: 1px solid var(--accent-border);
+  background: rgba(124,92,191,.08);
+  color: var(--accent-light);
+}
 
     :root {
       --bg: #0a0a0f;
@@ -783,7 +802,7 @@
       <button id="lang-en" type="button">EN</button>
       <button id="lang-gr" type="button">GR</button>
     </div>
-    <a href="#contact" class="nav-cta" id="nav-cta">Request Demo</a>
+    <a href="#contact" class="nav-cta" id="nav-cta">Request a Demo</a>
   </nav>
 
   <section id="hero">
@@ -800,13 +819,14 @@
 </p>
 
 <p class="hero-sub reveal visible" id="hero-sub2" style="font-size:.9rem; color:var(--text-faint);">
-  Built by a physician for real clinical workflow — not generic AI theatre.
-  Designed to reduce friction during real clinic time.
+  Built by a physician for real clinical workflow and clarity — not generic AI theatre.
+  Designed to reduce friction during real clinic flow.
   Shaped by real clinical pressure, where hesitation has a cost.
+  
 </p>
         <div class="hero-actions reveal visible">
           <a href="#contact" class="btn btn-primary" id="hero-btn-1">Request a Demo</a>
-          <a href="#features" class="btn btn-secondary" id="hero-btn-2">Explore Features</a>
+          <a href="#features" class="btn btn-secondary" id="hero-btn-2">How does it work?</a>
         </div>
       </div>
 
@@ -832,10 +852,23 @@
     <p style="color:var(--text-faint); font-size:.85rem; margin-top:1rem;" id="preview-click">Click any image to expand</p>
 
     <div class="screenshot-grid">
-      <img src="screenshot-main.png" class="screenshot" alt="OmniDerma lesion analysis screenshot">
-      <img src="screenshot-patient.png" class="screenshot" alt="OmniDerma patient workflow screenshot">
-      <img src="screenshot-followup.png" class="screenshot" alt="OmniDerma follow-up comparison screenshot">
-    </div>
+
+  <div>
+    <img src="screenshot-patient.png" class="screenshot">
+    <p class="screenshot-caption highlight" id="preview-cap-1">Take history, upload images, save patient record</p>
+  </div>
+
+  <div>
+    <img src="screenshot-main.png" class="screenshot">
+    <p class="screenshot-caption highlight" id="preview-cap-2">Get clear results and output based on guidelines, instantly</p>
+  </div>
+
+  <div>
+    <img src="screenshot-followup.png" class="screenshot">
+    <p class="screenshot-caption highlight" id="preview-cap-3">Track lesion evolution</p>
+  </div>
+
+</div>
 
     <p style="margin-top:1.2rem; color:var(--text-faint); font-size:.9rem;" id="preview-bottom">
       From image to assessment to documentation, without bouncing between tools.
@@ -992,6 +1025,46 @@
     </div>
   </section>
 
+  <p class="section-tag" style="text-align:center; margin-top:2rem;" id="security-built">
+  Built with care
+</p>
+
+  <div style="
+  margin-top:2.5rem;
+  border: 1px solid var(--accent-border);
+  border-radius: 18px;
+  padding: 1.4rem 1.6rem;
+  background: rgba(124,92,191,.05);
+  max-width: 680px;
+  margin-left:auto;
+  margin-right:auto;
+">
+
+  <p style="
+    font-family: 'DM Mono', monospace;
+    font-size: .7rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    margin-bottom: .8rem;
+  ">
+    <span id="security-title">Security & Privacy</span>
+  </p>
+
+  <p style="
+  color: var(--text-soft);
+  font-size: .92rem;
+  line-height: 1.85;
+  margin: 0;
+" id="security-text">
+  Access is restricted through authenticated accounts, with all data scoped to individual users. 
+  OmniDerma is designed to minimize unnecessary storage of sensitive information while keeping clinical workflows functional.
+  <br><br>
+  The platform is currently in a controlled-use phase and is evolving toward full clinical-grade security and compliance as it grows.
+</p>
+
+</div>
+
   <section id="disclaimer" class="section" style="padding-top:3rem;padding-bottom:3rem;">
   <div class="container">
     <div style="
@@ -1037,7 +1110,7 @@
       <img src="omniderma-logo.png" alt="OmniDerma footer logo" />
     </div>
     <div id="footer-copy">© 2026 OmniDerma. All rights reserved.</div>
-    <div class="footer-meta" id="footer-meta">AI-assisted · physician-led</div>
+    <div class="footer-meta" id="footer-meta">Physician-led · AI-assisted</div>
   </footer>
 
 
@@ -1115,19 +1188,22 @@
         navFeatures: "Features",
         navWorkflow: "How it works",
         navContact: "Contact",
-        navCta: "Request Demo",
+        navCta: "Request a Demo",
 
         heroEyebrow: "Physician-led dermatology workflow platform",
         heroTitle: "Less time thinking.<em> More time deciding.</em>",
         heroSub: "Review lesions, organize differentials, and document cases in one place — without losing time between image, impression, and next step.",
-        heroSub2: "Built by a physician for real clinical workflow — not generic AI theatre. Designed to reduce friction during real clinic time. Shaped by real clinical pressure, where hesitation has a cost.",
+        heroSub2: "Built by a physician for real clinical workflow — not generic AI theatre. Designed to reduce friction during real clinic flow. Shaped by real clinical pressure, where hesitation has a cost.",
         heroBtn1: "Request a Demo",
-        heroBtn2: "Explore Features",
+        heroBtn2: "How does it work?",
 
         previewTag: "Product Preview",
         previewTitle: "See OmniDerma <em>in action</em>",
         previewLead: "Real outputs from the platform — clear, practical, and made to be reviewed quickly.",
         previewClick: "Click any image to expand",
+        previewCap1: "Take history, upload images, save patient record",
+        previewCap2: "Get clear results and output based on guidelines, instantly",
+        previewCap3: "Track lesion evolution",
         previewBottom: "From image to assessment to documentation, without bouncing between tools.",
 
         omniTag: "Flagship module",
@@ -1185,6 +1261,9 @@
         contactLead: "Whether you are a clinician, practice, health system, collaborator, or investor, we would be glad to show you how OmniDerma can fit into real dermatology workflow.",
         contactCta: "Request a Demo",
         contactNote: "Opens your email to contact the team directly.",
+        securityBuilt: "Built with care",
+        securityTitle: "Security & Privacy",
+        securityText: "Access is restricted through authenticated accounts, with all data scoped to individual users. OmniDerma is designed to minimize unnecessary storage of sensitive information while keeping clinical workflows functional.<br><br>The platform is currently in a controlled-use phase and is evolving toward full clinical-grade security and compliance as it grows.",
 
         discTitle: "Medical Disclaimer",
         disc1: "OmniDerma is a physician-led, AI-assisted clinical support tool intended for training and educational purposes only. The platform does not provide medical diagnosis and must not be used as a standalone diagnostic system. All outputs require interpretation by qualified medical professionals.",
@@ -1192,7 +1271,7 @@
         disc3: "AI-generated analyses may be inaccurate or incomplete. Clinical decisions must always be based on current medical guidelines, physician judgment, and individual patient context.",
 
         footerCopy: "© 2026 OmniDerma. All rights reserved.",
-        footerMeta: "AI-assisted · physician-led"
+        footerMeta: "Physician-led · AI-assisted"
       },
 
       gr: {
@@ -1201,19 +1280,22 @@
         navFeatures: "Δυνατότητες",
         navWorkflow: "Πώς λειτουργεί",
         navContact: "Επικοινωνία",
-        navCta: "Ζήτηση Demo",
+        navCta: "Αίτημα για Demo",
 
         heroEyebrow: "Πλατφόρμα δερματολογικής ροής εργασίας σχεδιασμένη από ιατρό",
         heroTitle: "Λιγότερη σκέψη.<em> Περισσότερες αποφάσεις.</em>",
         heroSub: "Αξιολόγησε δερματικές βλάβες, οργάνωσε τη διαφορική διάγνωση και κατέγραψε περιστατικά σε ένα ενιαίο περιβάλλον — χωρίς να χάνεις χρόνο μεταξύ εικόνας, εκτίμησης και επόμενου βήματος.",
         heroSub2: "Σχεδιασμένο από ιατρό για πραγματική κλινική πράξη — όχι τυπικό AI θέατρο. Μειώνει την τριβή στην καθημερινή ροή εργασίας, εκεί όπου η καθυστέρηση έχει κόστος.",
-        heroBtn1: "Ζήτηση Demo",
-        heroBtn2: "Εξερεύνηση Δυνατοτήτων",
+        heroBtn1: "Αίτημα για Demo",
+        heroBtn2: "Πώς δουλεύει?",
 
         previewTag: "Επισκόπηση Προϊόντος",
         previewTitle: "Δες το OmniDerma <em>στην πράξη</em>",
         previewLead: "Πραγματικά αποτελέσματα από την πλατφόρμα — καθαρά, πρακτικά και σχεδιασμένα για γρήγορη αξιολόγηση.",
         previewClick: "Πάτησε σε οποιαδήποτε εικόνα για μεγέθυνση",
+        previewCap1: "Λήψη ιστορικού, μεταφόρτωση εικόνων, αποθήκευση φακέλου ασθενούς",
+        previewCap2: "Ξεκάθαρα αποτελέσματα και συστάσεις σύμφωνα με guidelines, άμεσα",
+        previewCap3: "Παρακολούθηση εξέλιξης της βλάβης",
         previewBottom: "Από την εικόνα στην εκτίμηση και την καταγραφή, χωρίς εναλλαγή μεταξύ εργαλείων.",
 
         omniTag: "Κύρια λειτουργία",
@@ -1269,8 +1351,11 @@
         contactTag: "Επικοινωνία",
         contactTitle: "Ενδιαφέρεσαι για demo,<br><em>συνεργασία ή συνέργεια;</em>",
         contactLead: "Είτε είσαι κλινικός ιατρός, δομή υγείας, συνεργάτης ή επενδυτής, θα χαρούμε να σου δείξουμε πώς το OmniDerma μπορεί να ενταχθεί στην πραγματική δερματολογική ροή εργασίας.",
-        contactCta: "Ζήτηση Demo",
+        contactCta: "Αίτημα για Demo",
         contactNote: "Ανοίγει το email για άμεση επικοινωνία με την ομάδα.",
+        securityBuilt: "Με προσοχή στη λεπτομέρεια",
+        securityTitle: "Ασφάλεια & Απόρρητο",
+        securityText: "Η πρόσβαση περιορίζεται μέσω πιστοποιημένων λογαριασμών, με όλα τα δεδομένα να αντιστοιχίζονται στον εκάστοτε χρήστη. Το OmniDerma έχει σχεδιαστεί ώστε να ελαχιστοποιεί την περιττή αποθήκευση ευαίσθητων πληροφοριών, διατηρώντας παράλληλα τη λειτουργικότητα της ροής της εργασίας σε ιατρικό πλαίσιο.<br><br>Η πλατφόρμα βρίσκεται αυτή τη στιγμή σε φάση ελεγχόμενης χρήσης και εξελίσσεται σταδιακά προς πλήρη κλινικού επιπέδου ασφάλεια και συμμόρφωση καθώς αναπτύσσεται.",
 
         discTitle: "Ιατρική αποποίηση ευθύνης",
         disc1: "Το OmniDerma είναι ένα εργαλείο κλινικής υποστήριξης με τη βοήθεια AI, σχεδιασμένο από ιατρό και προορισμένο αποκλειστικά για εκπαιδευτική και υποβοηθητική χρήση. Η πλατφόρμα δεν παρέχει ιατρική διάγνωση και δεν πρέπει να χρησιμοποιείται ως αυτόνομο διαγνωστικό σύστημα. Όλα τα αποτελέσματα απαιτούν ερμηνεία από καταρτισμένους επαγγελματίες υγείας.",
@@ -1278,7 +1363,7 @@
         disc3: "Οι αναλύσεις που παράγονται από AI ενδέχεται να είναι ανακριβείς ή ελλιπείς. Οι κλινικές αποφάσεις πρέπει πάντοτε να βασίζονται στις ισχύουσες κατευθυντήριες οδηγίες, στην ιατρική κρίση και στο εκάστοτε ατομικό κλινικό πλαίσιο.",
 
         footerCopy: "© 2026 OmniDerma. Με επιφύλαξη παντός δικαιώματος.",
-        footerMeta: "AI-assisted · physician-led"
+        footerMeta: "Physician-led · AI-assisted"
       }
     };
 
@@ -1316,6 +1401,9 @@
       setHTML("preview-title", t.previewTitle);
       setText("preview-lead", t.previewLead);
       setText("preview-click", t.previewClick);
+      setText("preview-cap-1", t.previewCap1);
+      setText("preview-cap-2", t.previewCap2);
+      setText("preview-cap-3", t.previewCap3);
       setText("preview-bottom", t.previewBottom);
 
       setText("omni-tag", t.omniTag);
@@ -1368,6 +1456,9 @@
       setText("contact-lead", t.contactLead);
       setText("contact-cta", t.contactCta);
       setText("contact-note", t.contactNote);
+      setText("security-built", t.securityBuilt);
+      setText("security-title", t.securityTitle);
+      setHTML("security-text", t.securityText);
 
       setText("disc-title", t.discTitle);
       setText("disc-1", t.disc1);
