@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" sizes="192x192" href="omnilogo_192x192.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How OmniDerma Works — App Manual</title>
+  <meta name="description" content="A guided overview of OmniDerma workflows, modules, clinical outputs, and platform logic." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    :root {
+      --bg:#0a0a0f; --bg-alt:#101019; --text:#f5f2ec; --text-soft:rgba(245,242,236,.68); --text-faint:rgba(245,242,236,.42);
+      --ink:#07101f; --ink-soft:#42526b; --paper:#f7f8fc; --paper-soft:#ffffff;
+      --accent:#7c5cbf; --accent-light:#a688e0; --accent-border:rgba(124,92,191,.28);
+      --orange:#ff781c; --orange-light:#ffb26d; --red:#ef5775; --blue:#2e86ff; --green:#10b981; --cyan:#14b8a6;
+      --container:1220px; --radius:28px; --nav-pad-x:4rem;
+    }
+    body { margin:0; background:var(--bg); color:var(--text); font-family:'Outfit',sans-serif; font-weight:300; line-height:1.55; overflow-x:hidden; }
+    body::before { content:''; position:fixed; inset:0; pointer-events:none; opacity:.22; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.045'/%3E%3C/svg%3E"); z-index:0; }
+    img { display:block; max-width:100%; }
+    a, button { font:inherit; }
+    section, nav, footer { position:relative; z-index:1; }
+    .container { max-width:var(--container); margin:0 auto; padding:0 4rem; }
+    nav { position:fixed; inset:0 0 auto 0; display:flex; align-items:center; justify-content:space-between; padding:1.1rem var(--nav-pad-x); border-bottom:1px solid transparent; z-index:30; transition:background .25s ease,border-color .25s ease,backdrop-filter .25s ease; }
+    nav.scrolled { background:rgba(10,10,15,.84); border-bottom-color:rgba(255,255,255,.08); backdrop-filter:blur(14px); }
+    .nav-brand { display:inline-flex; align-items:center; color:var(--text); text-decoration:none; }
+    .nav-brand img { height:70px; width:auto; }
+    .nav-links { display:flex; gap:1.55rem; align-items:center; list-style:none; margin:0; padding:0; }
+    .nav-links a { color:var(--text-faint); text-decoration:none; font-size:.74rem; letter-spacing:.13em; text-transform:uppercase; transition:color .2s ease; }
+    .nav-links a:hover,.nav-links a:focus-visible { color:var(--text); }
+    .lang-toggle { display:flex; gap:6px; align-items:center; }
+    .lang-toggle button { background:transparent; color:var(--text-faint); border:1px solid rgba(255,255,255,.15); padding:5px 10px; border-radius:999px; font-size:.7rem; letter-spacing:.1em; cursor:pointer; transition:all .2s ease; }
+    .lang-toggle button.active { color:var(--accent-light); border-color:var(--accent-light); background:rgba(124,92,191,.12); }
+    .nav-cta { display:inline-flex; align-items:center; justify-content:center; min-height:44px; padding:.75rem 1.25rem; border:1px solid var(--accent-border); color:var(--accent-light); background:rgba(124,92,191,.08); border-radius:999px; text-decoration:none; font-size:.76rem; letter-spacing:.12em; text-transform:uppercase; }
+    .hero { min-height:100vh; display:flex; align-items:center; padding:9rem 0 5rem; }
+    .hero-grid { display:grid; grid-template-columns:minmax(0,.9fr) minmax(340px,1.1fr); gap:3.5rem; align-items:center; }
+    .hero-logo { width:clamp(300px,38vw,540px); margin-bottom:1.4rem; }
+    .eyebrow,.section-tag,.manual-label { font-family:'DM Mono',monospace; text-transform:uppercase; letter-spacing:.21em; color:var(--accent-light); font-size:.72rem; margin:0 0 1rem; }
+    h1,h2,h3 { margin:0; }
+    h1 { font-family:'Cormorant Garamond',serif; font-weight:300; font-size:clamp(3.2rem,7vw,6.6rem); line-height:.95; letter-spacing:-.03em; }
+    h1 em,h2 em { color:var(--accent-light); font-style:italic; }
+    .hero-sub { max-width:620px; margin:1.5rem 0 0; color:var(--text-soft); font-size:1.06rem; line-height:1.9; }
+    .hero-actions { display:flex; flex-wrap:wrap; gap:1rem; margin-top:2rem; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; min-height:48px; padding:.95rem 1.45rem; border-radius:999px; text-decoration:none; font-size:.8rem; letter-spacing:.11em; text-transform:uppercase; transition:transform .15s ease, background .2s ease, border-color .2s ease; }
+    .btn:hover { transform:translateY(-1px); }
+    .btn-primary { color:#0a0a0f; background:var(--accent-light); border:1px solid var(--accent-light); font-weight:600; }
+    .btn-secondary { color:var(--text); border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.03); }
+    .hero-shot { border:1px solid rgba(255,255,255,.10); border-radius:30px; padding:1rem; background:linear-gradient(135deg,rgba(124,92,191,.13),rgba(255,120,28,.05)); box-shadow:0 24px 70px rgba(0,0,0,.35); }
+    .hero-shot img { border-radius:22px; cursor:pointer; }
+    .quick-map { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:.8rem; margin-top:2.2rem; }
+    .quick-map a { text-decoration:none; color:var(--text-soft); border:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.025); border-radius:18px; padding:1rem; transition:all .2s ease; }
+    .quick-map a:hover { color:var(--text); border-color:rgba(255,255,255,.22); transform:translateY(-1px); }
+    .quick-map strong { display:block; color:var(--text); font-weight:500; margin-bottom:.2rem; }
+    .section { padding:7rem 0; }
+    .section.dark { background:#0d0d13; border-top:1px solid rgba(255,255,255,.06); border-bottom:1px solid rgba(255,255,255,.06); }
+    .section.light { background:var(--paper); color:var(--ink); }
+    .section.light .section-tag { color:#9b3bc7; }
+    .section.light .section-lead,.section.light .manual-copy p,.section.light .mini-card p { color:var(--ink-soft); }
+    .section.light .manual-card,.section.light .mini-card { background:#fff; border-color:rgba(40,60,90,.12); box-shadow:0 12px 30px rgba(16,24,40,.06); }
+    .section-title { font-family:'Cormorant Garamond',serif; font-weight:300; line-height:1.04; font-size:clamp(2.45rem,4.8vw,4.2rem); }
+    .section-lead { max-width:720px; margin:1rem 0 0; color:var(--text-soft); font-size:1rem; line-height:1.9; }
+    .manual-row { display:grid; grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr); gap:3rem; align-items:center; margin-top:3rem; }
+    .manual-row.reverse { grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr); }
+    .manual-row.reverse .manual-copy { order:2; }
+    .manual-row.reverse .manual-media { order:1; }
+    .manual-copy h3 { font-size:1.75rem; line-height:1.15; font-weight:500; margin-bottom:.75rem; }
+    .manual-copy p { color:var(--text-soft); line-height:1.85; margin:.5rem 0 0; }
+    .manual-card { border:1px solid rgba(255,255,255,.09); border-radius:28px; padding:1.1rem; background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.015)); box-shadow:0 20px 54px rgba(0,0,0,.23); }
+    .manual-card img,.screen { width:100%; border-radius:20px; border:1px solid rgba(255,255,255,.08); cursor:pointer; background:#111; }
+    .section.light .manual-card img,.section.light .screen { border-color:rgba(40,60,90,.12); background:#fff; }
+    .manual-card.phone { max-width:420px; margin:0 auto; background:linear-gradient(135deg,rgba(255,120,28,.15),rgba(124,92,191,.08)); }
+    .pair-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; }
+    .tri-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; margin-top:2rem; }
+    .mini-card { border:1px solid rgba(255,255,255,.08); border-radius:22px; padding:1.25rem; background:rgba(255,255,255,.025); }
+    .mini-card h4 { margin:0 0 .4rem; font-size:1.05rem; font-weight:600; }
+    .mini-card p { margin:0; color:var(--text-soft); font-size:.92rem; line-height:1.7; }
+    .accent-orange { --accent-light:var(--orange-light); --accent-border:rgba(255,120,28,.32); }
+    .accent-red { --accent-light:#ff8aa0; --accent-border:rgba(239,87,117,.34); }
+    .accent-green { --accent-light:#64e5bd; --accent-border:rgba(20,184,166,.30); }
+    .caption { margin:.85rem 0 0; color:var(--text-faint); font-family:'DM Mono',monospace; font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; text-align:center; }
+    .section.light .caption { color:rgba(66,82,107,.62); }
+    .disclaimer-box { margin-top:2.4rem; border:1px solid rgba(255,255,255,.08); border-radius:22px; padding:1.5rem; background:rgba(255,255,255,.025); color:var(--text-soft); line-height:1.8; }
+    .section.light .disclaimer-box { background:#fff; border-color:rgba(40,60,90,.12); color:var(--ink-soft); }
+    footer { display:flex; justify-content:space-between; align-items:center; gap:1rem; padding:2rem 4rem 2.5rem; border-top:1px solid rgba(255,255,255,.06); color:var(--text-faint); font-size:.8rem; }
+    .footer-brand img { height:72px; opacity:.85; }
+    .footer-meta { font-family:'DM Mono',monospace; letter-spacing:.08em; text-transform:uppercase; font-size:.68rem; }
+    .reveal { opacity:0; transform:translateY(20px); transition:opacity .65s ease, transform .65s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .image-modal { display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,.9); align-items:center; justify-content:center; padding:2rem; }
+    .image-modal.open { display:flex; }
+    .image-modal img { max-width:min(1180px,94vw); max-height:88vh; width:auto; height:auto; border-radius:16px; border:1px solid rgba(255,255,255,.14); background:#111; box-shadow:0 24px 70px rgba(0,0,0,.5); }
+    .image-modal .close { position:absolute; top:20px; right:28px; color:white; font-size:42px; line-height:1; cursor:pointer; }
+    a:focus-visible,button:focus-visible,img:focus-visible { outline:2px solid var(--accent-light); outline-offset:3px; }
+    @media (max-width:1100px){ .hero-grid,.manual-row,.manual-row.reverse{grid-template-columns:1fr;} .manual-row.reverse .manual-copy,.manual-row.reverse .manual-media{order:initial;} .quick-map{grid-template-columns:repeat(2,1fr);} .tri-grid{grid-template-columns:1fr;} }
+    @media (max-width:900px){ :root{--nav-pad-x:1.1rem;} .container{padding:0 1.15rem;} nav{padding:1rem 1.1rem;} .nav-brand img{height:70px;} .nav-links{display:none;} .nav-cta{display:none;} .lang-toggle{margin-left:auto;} .hero{padding-top:8rem;} .quick-map,.pair-grid{grid-template-columns:1fr;} .section{padding:5rem 0;} footer{flex-direction:column;text-align:center;padding-left:1.2rem;padding-right:1.2rem;} }
+    @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto;} *,*::before,*::after{animation:none!important;transition:none!important;} .reveal{opacity:1!important;transform:none!important;} }
+  </style>
+</head>
+<body>
+  <nav id="nav">
+    <a href="index.html" class="nav-brand" aria-label="OmniDerma home"><img src="omniderma-logo.png" alt="OmniDerma logo"></a>
+    <ul class="nav-links" aria-label="Manual sections">
+      <li><a href="#architecture" data-i18n="navArchitecture">Architecture</a></li>
+      <li><a href="#rapid" data-i18n="navRapid">Rapid</a></li>
+      <li><a href="#omnirisk" data-i18n="navOmniRisk">OmniRisk</a></li>
+      <li><a href="#tools" data-i18n="navTools">Tools</a></li>
+      <li><a href="#safety" data-i18n="navSafety">Safety</a></li>
+    </ul>
+    <div class="lang-toggle"><button id="lang-en" type="button">EN</button><button id="lang-gr" type="button">GR</button></div>
+    <a href="mailto:info@omniderma.health" class="nav-cta" data-i18n="navDemo">Request a Demo</a>
+  </nav>
+
+  <section class="hero" id="top">
+    <div class="container hero-grid">
+      <div>
+        <img src="omniderma-logo.png" class="hero-logo reveal visible" alt="OmniDerma">
+        <p class="eyebrow reveal visible" data-i18n="heroEyebrow">App manual</p>
+        <h1 class="reveal visible" data-i18n-html="heroTitle">How OmniDerma <em>works.</em></h1>
+        <p class="hero-sub reveal visible" data-i18n="heroSub">A guided overview of the platform, its workflows, and the clinical logic behind each module.</p>
+        <p class="hero-sub reveal visible" style="font-size:.92rem;color:var(--text-faint);" data-i18n="heroNote">Built around real clinical flow: capture, context, analysis, interpretation, documentation, and follow-up.</p>
+        <div class="hero-actions reveal visible"><a class="btn btn-primary" href="#architecture" data-i18n="heroBtn1">Start the guide</a><a class="btn btn-secondary" href="index.html" data-i18n="heroBtn2">Back to landing page</a></div>
+        <div class="quick-map reveal visible">
+          <a href="#rapid"><strong data-i18n="mapRapidT">Rapid Mode</strong><span data-i18n="mapRapidD">Fast image-first triage</span></a>
+          <a href="#patients"><strong data-i18n="mapPatientT">Patients</strong><span data-i18n="mapPatientD">Records and images</span></a>
+          <a href="#omnirisk"><strong data-i18n="mapOmniT">OmniRisk</strong><span data-i18n="mapOmniD">Risk and cases</span></a>
+          <a href="#tools"><strong data-i18n="mapToolsT">Tools</strong><span data-i18n="mapToolsD">SGT, Treatment, Emergency</span></a>
+        </div>
+      </div>
+      <div class="hero-shot reveal visible"><img src="manual-full-mode.jpg" class="screen" alt="OmniDerma full mode command board"><p class="caption" data-i18n="heroCaption">The full analyzer command board</p></div>
+    </div>
+  </section>
+
+  <section class="section dark" id="architecture">
+    <div class="container">
+      <p class="section-tag reveal" data-i18n="archTag">Platform architecture</p>
+      <h2 class="section-title reveal" data-i18n-html="archTitle">One platform, <em>multiple clinical modes.</em></h2>
+      <p class="section-lead reveal" data-i18n="archLead">OmniDerma separates workflows by clinical intent: full patient management, fast triage, focused tools, and command-board navigation.</p>
+      <div class="manual-row">
+        <div class="manual-copy reveal">
+          <h3 data-i18n="archH">A control panel for real workflow switching.</h3>
+          <p data-i18n="archP1">The control panel gives fast access to Main Flow, Rapid Mode, Tools, and Full Mode. The goal is not to hide complexity, but to organize it around how clinicians actually move through decisions.</p>
+          <p data-i18n="archP2">Full Mode works like a command board: each analyzer opens in focus, while quick switching remains available at the bottom of the interface.</p>
+        </div>
+        <div class="manual-media reveal"><div class="manual-card phone"><img src="manual-control-panel.jpg" class="screen" alt="OmniDerma control panel"></div><p class="caption" data-i18n="archCaption">Navigation · View · System</p></div>
+      </div>
+      <div class="tri-grid reveal">
+        <div class="mini-card"><h4 data-i18n="archC1T">Main Flow</h4><p data-i18n="archC1D">Patients, OmniRisk, and SGT for structured clinical work.</p></div>
+        <div class="mini-card"><h4 data-i18n="archC2T">Rapid Mode</h4><p data-i18n="archC2D">A fast, image-first workspace for quick triage orientation.</p></div>
+        <div class="mini-card"><h4 data-i18n="archC3T">Tools</h4><p data-i18n="archC3D">Focused analyzers for treatment response, differentials, and emergency orientation.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section light" id="patients">
+    <div class="container">
+      <p class="section-tag reveal" data-i18n="patientsTag">Patient workspace</p>
+      <h2 class="section-title reveal" data-i18n-html="patientsTitle">Clinical continuity, not isolated outputs.</h2>
+      <p class="section-lead reveal" data-i18n="patientsLead">Patient records let clinicians store history, notes, attached images, and generated PDFs in one searchable workspace.</p>
+      <div class="manual-row reverse">
+        <div class="manual-copy reveal"><h3 data-i18n="patientsH">Attach images, preserve context, continue the case.</h3><p data-i18n="patientsP1">The patient workspace supports camera capture, upload, image attachment, history fields, internal notes, and PDF generation.</p><p data-i18n="patientsP2">Rapid sessions can also be promoted into patient records, so fast triage can become part of the longitudinal timeline.</p></div>
+        <div class="manual-media reveal"><div class="manual-card phone"><img src="manual-patient-mobile.jpg" class="screen" alt="OmniDerma patient workspace on mobile"></div><p class="caption" data-i18n="patientsCaption">Patient creation and image attachment</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark accent-orange" id="rapid">
+    <div class="container">
+      <p class="section-tag reveal" data-i18n="rapidTag">Rapid Mode</p>
+      <h2 class="section-title reveal" data-i18n-html="rapidTitle">Fast lesion triage under <em>time pressure.</em></h2>
+      <p class="section-lead reveal" data-i18n="rapidLead">Rapid Mode is designed for one lesion, one or two images, and brief context. It prioritizes speed, readability, and escalation-oriented action.</p>
+      <div class="manual-row">
+        <div class="manual-copy reveal"><h3 data-i18n="rapidH1">Start with the minimum useful input.</h3><p data-i18n="rapidP1">Capture or upload images, then optionally add structured context such as new lesion, symptomatic, bleeding, pruritic, or changing.</p><p data-i18n="rapidP2">The system keeps recent runs in a temporary Rapid memory, allowing quick review before creating a full patient record.</p></div>
+        <div class="manual-media reveal"><div class="manual-card phone"><img src="manual-rapid-home.jpg" class="screen" alt="Rapid Mode home screen"></div><p class="caption" data-i18n="rapidCaption1">Image-first triage workspace</p></div>
+      </div>
+      <div class="manual-row reverse">
+        <div class="manual-copy reveal"><h3 data-i18n="rapidH2">A clear risk signal and immediate orientation.</h3><p data-i18n="rapidP3">Rapid output separates the risk signal, leading considerations, and action orientation so the result can be read quickly under pressure.</p><p data-i18n="rapidP4">When needed, the result can be promoted into the patient timeline with images, context, and the generated triage summary.</p></div>
+        <div class="manual-media reveal"><div class="pair-grid"><div class="manual-card"><img src="manual-rapid-context.jpg" class="screen" alt="Rapid Mode context selection"></div><div class="manual-card"><img src="manual-rapid-output.jpg" class="screen" alt="Rapid Mode output"></div></div><p class="caption" data-i18n="rapidCaption2">Context flags → risk signal → action orientation</p></div>
+      </div>
+      <div class="manual-row">
+        <div class="manual-copy reveal"><h3 data-i18n="rapidH3">From triage to record.</h3><p data-i18n="rapidP5">A Rapid session is not trapped as a disposable output. It can become a structured patient record when the clinician decides the case should continue.</p></div>
+        <div class="manual-media reveal"><div class="manual-card phone"><img src="manual-rapid-promote.jpg" class="screen" alt="Promote Rapid session to patient record"></div><p class="caption" data-i18n="rapidCaption3">Promote Rapid session</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section light" id="omnirisk">
+    <div class="container">
+      <p class="section-tag reveal" data-i18n="omniTag">OmniRisk</p>
+      <h2 class="section-title reveal" data-i18n-html="omniTitle">Risk support with image, context, and case-aware output.</h2>
+      <p class="section-lead reveal" data-i18n="omniLead">OmniRisk combines uploaded images, clinical context, selected diagnostic categories, and similar past cases to produce structured decision support.</p>
+      <div class="manual-row">
+        <div class="manual-copy reveal"><h3 data-i18n="omniH1">Input is clinically weighted.</h3><p data-i18n="omniP1">The image is interpreted together with the note, patient history, lesion site, timing, symptoms, and other context. This keeps the output closer to clinical reasoning rather than image-only pattern matching.</p></div>
+        <div class="manual-media reveal"><div class="manual-card"><img src="manual-omnirisk-input.png" class="screen" alt="OmniRisk input panel"></div><p class="caption" data-i18n="omniCaption1">Images · categories · patient history</p></div>
+      </div>
+      <div class="manual-row reverse">
+        <div class="manual-copy reveal"><h3 data-i18n="omniH2">Probability is separated from explanation.</h3><p data-i18n="omniP2">The result can show final probability, confidence interval, differential hierarchy, probability breakdown, and similar past cases. This makes the output inspectable rather than opaque.</p><p data-i18n="omniP3">Dual-model ensemble views help represent agreement and uncertainty when available.</p></div>
+        <div class="manual-media reveal"><div class="pair-grid"><div class="manual-card"><img src="manual-omnirisk-primary.png" class="screen" alt="OmniRisk primary model result"></div><div class="manual-card"><img src="manual-omnirisk-ensemble.png" class="screen" alt="OmniRisk ensemble result"></div></div><p class="caption" data-i18n="omniCaption2">Primary model and dual-model ensemble</p></div>
+      </div>
+      <div class="tri-grid reveal">
+        <div class="mini-card"><h4 data-i18n="omniC1T">AI-only</h4><p data-i18n="omniC1D">The model’s image-and-context estimate before case adjustment.</p></div>
+        <div class="mini-card"><h4 data-i18n="omniC2T">Case-adjusted</h4><p data-i18n="omniC2D">A probability influenced by similar verified cases when available.</p></div>
+        <div class="mini-card"><h4 data-i18n="omniC3T">Confidence signal</h4><p data-i18n="omniC3D">A practical indication of agreement and uncertainty, not a replacement for clinical judgment.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark" id="learning">
+    <div class="container">
+      <p class="section-tag reveal" data-i18n="learnTag">Learning loop</p>
+      <h2 class="section-title reveal" data-i18n-html="learnTitle">Physician feedback can become future intelligence.</h2>
+      <p class="section-lead reveal" data-i18n="learnLead">The feedback hook lets clinicians save corrected outcomes and final diagnoses for review before entering a trusted case library.</p>
+      <div class="manual-row">
+        <div class="manual-copy reveal"><h3 data-i18n="learnH">A supervised learning intake, not automatic self-training.</h3><p data-i18n="learnP1">Clinician agreement, disagreement, final diagnosis, malignant/neoplastic labels, and notes can be captured after a run.</p><p data-i18n="learnP2">This supports a curated case-intelligence pipeline while keeping physician supervision at the center.</p></div>
+        <div class="manual-media reveal"><div class="manual-card"><img src="manual-feedback-hook.png" class="screen" alt="OmniRisk feedback hook"></div><p class="caption" data-i18n="learnCaption">Case learning intake</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section light accent-green" id="tools">
+    <div class="container">
+      <p class="section-tag reveal" data-i18n="toolsTag">Focused tools</p>
+      <h2 class="section-title reveal" data-i18n-html="toolsTitle">Separate tools for separate clinical questions.</h2>
+      <p class="section-lead reveal" data-i18n="toolsLead">Not every task is melanoma risk estimation. OmniDerma separates broader differential support, treatment response, reasoning, and emergency orientation into focused workspaces.</p>
+      <div class="manual-row">
+        <div class="manual-copy reveal"><h3 data-i18n="neoH">Neoplasia / Diff3</h3><p data-i18n="neoP">The focused risk and differential tools provide probability, recommendations, and ranked diagnostic considerations while keeping physician review central.</p></div>
+        <div class="manual-media reveal"><div class="pair-grid"><div class="manual-card"><img src="manual-neoplasia-input.png" class="screen" alt="Neoplasia risk input"></div><div class="manual-card"><img src="manual-neoplasia-differential.png" class="screen" alt="Neoplasia differential output"></div></div><p class="caption" data-i18n="neoCaption">Probability · recommendation · differential</p></div>
+      </div>
+      <div class="manual-row reverse">
+        <div class="manual-copy reveal"><h3 data-i18n="sgtH">ChatSGT</h3><p data-i18n="sgtP">ChatSGT is a clinical reasoning layer. It is designed to interpret context, question assumptions, identify weak points, and make uncertainty more visible.</p></div>
+        <div class="manual-media reveal"><div class="manual-card"><img src="manual-chatsgt.png" class="screen" alt="ChatSGT workspace"></div><p class="caption" data-i18n="sgtCaption">Clinical reasoning layer</p></div>
+      </div>
+      <div class="manual-row">
+        <div class="manual-copy reveal"><h3 data-i18n="treatH">Treatment Response</h3><p data-i18n="treatP">The treatment workspace is built for before-and-after comparison, response review, and longitudinal assessment of therapeutic change.</p></div>
+        <div class="manual-media reveal"><div class="manual-card"><img src="manual-treatment.png" class="screen" alt="Treatment response workspace"></div><p class="caption" data-i18n="treatCaption">Before / after clinical comparison</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark accent-red" id="safety">
+    <div class="container">
+      <p class="section-tag reveal" data-i18n="safeTag">Safety and escalation</p>
+      <h2 class="section-title reveal" data-i18n-html="safeTitle">Emergency guidance is escalation-first.</h2>
+      <p class="section-lead reveal" data-i18n="safeLead">The Emergency Dermatology Assistant is designed for structured orientation, not standalone emergency diagnosis. Unstable patients and red-flag presentations require immediate protocol-based escalation.</p>
+      <div class="manual-row reverse">
+        <div class="manual-copy reveal"><h3 data-i18n="safeH">Built to respect clinical boundaries.</h3><p data-i18n="safeP1">Emergency output is educational and supportive. It should be interpreted by clinicians and checked against current protocols, local resources, and patient stability.</p><p data-i18n="safeP2">The same philosophy applies across OmniDerma: outputs support decision-making; they do not replace qualified medical judgment.</p></div>
+        <div class="manual-media reveal"><div class="manual-card"><img src="manual-emergency.png" class="screen" alt="Emergency Dermatology Assistant"></div><p class="caption" data-i18n="safeCaption">Escalation-first assistant</p></div>
+      </div>
+      <div class="disclaimer-box reveal"><p class="manual-label" data-i18n="discTag">Medical disclaimer</p><span data-i18n="discText">OmniDerma is a physician-led, AI-assisted clinical support platform intended for educational and workflow-support use. It does not provide standalone medical diagnosis. Clinical decisions must always be made by qualified medical professionals using current guidelines, direct patient assessment, and appropriate investigations. Histopathology remains the gold standard for skin neoplasms where indicated.</span></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-brand"><img src="omniderma-logo.png" alt="OmniDerma footer logo"></div>
+    <div data-i18n="footerCopy">© 2026 OmniDerma. All rights reserved.</div>
+    <div class="footer-meta" data-i18n="footerMeta">Physician-led · AI-assisted</div>
+  </footer>
+
+  <div id="image-modal" class="image-modal" aria-hidden="true"><span class="close" aria-label="Close image preview">&times;</span><img id="modal-img" alt="Expanded OmniDerma screenshot"></div>
+
+  <script>
+    const translations = {
+      en: {
+        navArchitecture:'Architecture', navRapid:'Rapid', navOmniRisk:'OmniRisk', navTools:'Tools', navSafety:'Safety', navDemo:'Request a Demo',
+        heroEyebrow:'App manual', heroTitle:'How OmniDerma <em>works.</em>', heroSub:'A guided overview of the platform, its workflows, and the clinical logic behind each module.', heroNote:'Built around real clinical flow: capture, context, analysis, interpretation, documentation, and follow-up.', heroBtn1:'Start the guide', heroBtn2:'Back to landing page', heroCaption:'The full analyzer command board',
+        mapRapidT:'Rapid Mode', mapRapidD:'Fast image-first triage', mapPatientT:'Patients', mapPatientD:'Records and images', mapOmniT:'OmniRisk', mapOmniD:'Risk and cases', mapToolsT:'Tools', mapToolsD:'SGT, Treatment, Emergency',
+        archTag:'Platform architecture', archTitle:'One platform, <em>multiple clinical modes.</em>', archLead:'OmniDerma separates workflows by clinical intent: full patient management, fast triage, focused tools, and command-board navigation.', archH:'A control panel for real workflow switching.', archP1:'The control panel gives fast access to Main Flow, Rapid Mode, Tools, and Full Mode. The goal is not to hide complexity, but to organize it around how clinicians actually move through decisions.', archP2:'Full Mode works like a command board: each analyzer opens in focus, while quick switching remains available at the bottom of the interface.', archCaption:'Navigation · View · System', archC1T:'Main Flow', archC1D:'Patients, OmniRisk, and SGT for structured clinical work.', archC2T:'Rapid Mode', archC2D:'A fast, image-first workspace for quick triage orientation.', archC3T:'Tools', archC3D:'Focused analyzers for treatment response, differentials, and emergency orientation.',
+        patientsTag:'Patient workspace', patientsTitle:'Clinical continuity, not isolated outputs.', patientsLead:'Patient records let clinicians store history, notes, attached images, and generated PDFs in one searchable workspace.', patientsH:'Attach images, preserve context, continue the case.', patientsP1:'The patient workspace supports camera capture, upload, image attachment, history fields, internal notes, and PDF generation.', patientsP2:'Rapid sessions can also be promoted into patient records, so fast triage can become part of the longitudinal timeline.', patientsCaption:'Patient creation and image attachment',
+        rapidTag:'Rapid Mode', rapidTitle:'Fast lesion triage under <em>time pressure.</em>', rapidLead:'Rapid Mode is designed for one lesion, one or two images, and brief context. It prioritizes speed, readability, and escalation-oriented action.', rapidH1:'Start with the minimum useful input.', rapidP1:'Capture or upload images, then optionally add structured context such as new lesion, symptomatic, bleeding, pruritic, or changing.', rapidP2:'The system keeps recent runs in a temporary Rapid memory, allowing quick review before creating a full patient record.', rapidCaption1:'Image-first triage workspace', rapidH2:'A clear risk signal and immediate orientation.', rapidP3:'Rapid output separates the risk signal, leading considerations, and action orientation so the result can be read quickly under pressure.', rapidP4:'When needed, the result can be promoted into the patient timeline with images, context, and the generated triage summary.', rapidCaption2:'Context flags → risk signal → action orientation', rapidH3:'From triage to record.', rapidP5:'A Rapid session is not trapped as a disposable output. It can become a structured patient record when the clinician decides the case should continue.', rapidCaption3:'Promote Rapid session',
+        omniTag:'OmniRisk', omniTitle:'Risk support with image, context, and case-aware output.', omniLead:'OmniRisk combines uploaded images, clinical context, selected diagnostic categories, and similar past cases to produce structured decision support.', omniH1:'Input is clinically weighted.', omniP1:'The image is interpreted together with the note, patient history, lesion site, timing, symptoms, and other context. This keeps the output closer to clinical reasoning rather than image-only pattern matching.', omniCaption1:'Images · categories · patient history', omniH2:'Probability is separated from explanation.', omniP2:'The result can show final probability, confidence interval, differential hierarchy, probability breakdown, and similar past cases. This makes the output inspectable rather than opaque.', omniP3:'Dual-model ensemble views help represent agreement and uncertainty when available.', omniCaption2:'Primary model and dual-model ensemble', omniC1T:'AI-only', omniC1D:'The model’s image-and-context estimate before case adjustment.', omniC2T:'Case-adjusted', omniC2D:'A probability influenced by similar verified cases when available.', omniC3T:'Confidence signal', omniC3D:'A practical indication of agreement and uncertainty, not a replacement for clinical judgment.',
+        learnTag:'Learning loop', learnTitle:'Physician feedback can become future intelligence.', learnLead:'The feedback hook lets clinicians save corrected outcomes and final diagnoses for review before entering a trusted case library.', learnH:'A supervised learning intake, not automatic self-training.', learnP1:'Clinician agreement, disagreement, final diagnosis, malignant/neoplastic labels, and notes can be captured after a run.', learnP2:'This supports a curated case-intelligence pipeline while keeping physician supervision at the center.', learnCaption:'Case learning intake',
+        toolsTag:'Focused tools', toolsTitle:'Separate tools for separate clinical questions.', toolsLead:'Not every task is melanoma risk estimation. OmniDerma separates broader differential support, treatment response, reasoning, and emergency orientation into focused workspaces.', neoH:'Neoplasia / Diff3', neoP:'The focused risk and differential tools provide probability, recommendations, and ranked diagnostic considerations while keeping physician review central.', neoCaption:'Probability · recommendation · differential', sgtH:'ChatSGT', sgtP:'ChatSGT is a clinical reasoning layer. It is designed to interpret context, question assumptions, identify weak points, and make uncertainty more visible.', sgtCaption:'Clinical reasoning layer', treatH:'Treatment Response', treatP:'The treatment workspace is built for before-and-after comparison, response review, and longitudinal assessment of therapeutic change.', treatCaption:'Before / after clinical comparison',
+        safeTag:'Safety and escalation', safeTitle:'Emergency guidance is escalation-first.', safeLead:'The Emergency Dermatology Assistant is designed for structured orientation, not standalone emergency diagnosis. Unstable patients and red-flag presentations require immediate protocol-based escalation.', safeH:'Built to respect clinical boundaries.', safeP1:'Emergency output is educational and supportive. It should be interpreted by clinicians and checked against current protocols, local resources, and patient stability.', safeP2:'The same philosophy applies across OmniDerma: outputs support decision-making; they do not replace qualified medical judgment.', safeCaption:'Escalation-first assistant', discTag:'Medical disclaimer', discText:'OmniDerma is a physician-led, AI-assisted clinical support platform intended for educational and workflow-support use. It does not provide standalone medical diagnosis. Clinical decisions must always be made by qualified medical professionals using current guidelines, direct patient assessment, and appropriate investigations. Histopathology remains the gold standard for skin neoplasms where indicated.', footerCopy:'© 2026 OmniDerma. All rights reserved.', footerMeta:'Physician-led · AI-assisted'
+      },
+      gr: {
+        navArchitecture:'Αρχιτεκτονική', navRapid:'Rapid', navOmniRisk:'OmniRisk', navTools:'Εργαλεία', navSafety:'Ασφάλεια', navDemo:'Αίτημα για Demo',
+        heroEyebrow:'Οδηγός εφαρμογής', heroTitle:'Πώς λειτουργεί το <em>OmniDerma.</em>', heroSub:'Μια καθοδηγούμενη επισκόπηση της πλατφόρμας, των ροών εργασίας και της κλινικής λογικής πίσω από κάθε λειτουργία.', heroNote:'Σχεδιασμένο γύρω από την πραγματική κλινική ροή: εικόνα, πλαίσιο, ανάλυση, ερμηνεία, καταγραφή και παρακολούθηση.', heroBtn1:'Ξεκίνα τον οδηγό', heroBtn2:'Πίσω στην αρχική σελίδα', heroCaption:'Ο κεντρικός πίνακας αναλυτών',
+        mapRapidT:'Rapid Mode', mapRapidD:'Γρήγορη αξιολόγηση με βάση την εικόνα', mapPatientT:'Ασθενείς', mapPatientD:'Φάκελοι και εικόνες', mapOmniT:'OmniRisk', mapOmniD:'Κίνδυνος και περιστατικά', mapToolsT:'Εργαλεία', mapToolsD:'SGT, Θεραπεία, Επείγοντα',
+        archTag:'Αρχιτεκτονική πλατφόρμας', archTitle:'Μία πλατφόρμα, <em>πολλαπλές κλινικές ροές.</em>', archLead:'Το OmniDerma χωρίζει τις λειτουργίες ανάλογα με την κλινική πρόθεση: διαχείριση ασθενών, γρήγορο triage, εστιασμένα εργαλεία και κεντρική πλοήγηση.', archH:'Control panel για πραγματική εναλλαγή ροών εργασίας.', archP1:'Το control panel δίνει γρήγορη πρόσβαση σε Main Flow, Rapid Mode, Tools και Full Mode. Ο στόχος δεν είναι να κρύψει την πολυπλοκότητα, αλλά να την οργανώσει γύρω από τον τρόπο που οι κλινικοί κινούνται μέσα στις αποφάσεις.', archP2:'Το Full Mode λειτουργεί σαν command board: κάθε αναλυτής ανοίγει σε εστίαση, ενώ η γρήγορη εναλλαγή παραμένει διαθέσιμη στο κάτω μέρος της διεπαφής.', archCaption:'Πλοήγηση · Προβολή · Σύστημα', archC1T:'Main Flow', archC1D:'Ασθενείς, OmniRisk και SGT για δομημένη κλινική εργασία.', archC2T:'Rapid Mode', archC2D:'Γρήγορο image-first περιβάλλον για άμεσο προσανατολισμό triage.', archC3T:'Tools', archC3D:'Εστιασμένοι αναλυτές για θεραπευτική ανταπόκριση, διαφορικές και επείγοντα.',
+        patientsTag:'Χώρος ασθενών', patientsTitle:'Κλινική συνέχεια, όχι απομονωμένα αποτελέσματα.', patientsLead:'Οι φάκελοι ασθενών επιτρέπουν αποθήκευση ιστορικού, σημειώσεων, εικόνων και PDF σε ένα αναζητήσιμο περιβάλλον.', patientsH:'Σύνδεση εικόνων, διατήρηση πλαισίου, συνέχεια περιστατικού.', patientsP1:'Ο χώρος ασθενών υποστηρίζει λήψη με κάμερα, μεταφόρτωση, σύνδεση εικόνων, πεδία ιστορικού, εσωτερικές σημειώσεις και δημιουργία PDF.', patientsP2:'Τα Rapid sessions μπορούν επίσης να μετατραπούν σε φακέλους ασθενών, ώστε το γρήγορο triage να γίνει μέρος της διαχρονικής παρακολούθησης.', patientsCaption:'Δημιουργία ασθενούς και σύνδεση εικόνων',
+        rapidTag:'Rapid Mode', rapidTitle:'Γρήγορο triage βλάβης υπό <em>πίεση χρόνου.</em>', rapidLead:'Το Rapid Mode είναι σχεδιασμένο για μία βλάβη, μία ή δύο εικόνες και σύντομο κλινικό πλαίσιο. Δίνει προτεραιότητα στην ταχύτητα, στην αναγνωσιμότητα και στον προσανατολισμό επείγουσας δράσης.', rapidH1:'Ξεκινά από το ελάχιστο χρήσιμο input.', rapidP1:'Κατέγραψε ή ανέβασε εικόνες και, αν χρειάζεται, πρόσθεσε δομημένο πλαίσιο όπως νέα βλάβη, συμπτωματική, αιμορραγική, κνησμώδης ή μεταβαλλόμενη.', rapidP2:'Το σύστημα διατηρεί πρόσφατες εκτελέσεις σε προσωρινή Rapid memory, επιτρέποντας γρήγορη ανασκόπηση πριν τη δημιουργία πλήρους φακέλου.', rapidCaption1:'Image-first triage workspace', rapidH2:'Καθαρό risk signal και άμεσος προσανατολισμός.', rapidP3:'Το Rapid output χωρίζει το risk signal, τις κύριες διαγνωστικές σκέψεις και το action orientation ώστε το αποτέλεσμα να διαβάζεται γρήγορα υπό πίεση.', rapidP4:'Όταν χρειάζεται, το αποτέλεσμα μπορεί να προωθηθεί στο patient timeline με εικόνες, πλαίσιο και τη σύνοψη triage.', rapidCaption2:'Context flags → risk signal → action orientation', rapidH3:'Από triage σε φάκελο.', rapidP5:'Ένα Rapid session δεν μένει εγκλωβισμένο ως προσωρινό output. Μπορεί να γίνει δομημένος φάκελος όταν ο κλινικός αποφασίσει ότι το περιστατικό πρέπει να συνεχιστεί.', rapidCaption3:'Μετατροπή Rapid session σε φάκελο',
+        omniTag:'OmniRisk', omniTitle:'Υποστήριξη κινδύνου με εικόνα, πλαίσιο και case-aware αποτέλεσμα.', omniLead:'Το OmniRisk συνδυάζει εικόνες, κλινικό πλαίσιο, επιλεγμένες κατηγορίες και παρόμοια παλαιότερα περιστατικά για δομημένη υποστήριξη απόφασης.', omniH1:'Το input σταθμίζεται κλινικά.', omniP1:'Η εικόνα ερμηνεύεται μαζί με σημείωση, ιστορικό, εντόπιση, χρονιότητα, συμπτώματα και άλλα στοιχεία. Έτσι το αποτέλεσμα παραμένει πιο κοντά στην κλινική σκέψη και όχι μόνο σε image-only pattern matching.', omniCaption1:'Εικόνες · κατηγορίες · ιστορικό ασθενούς', omniH2:'Η πιθανότητα διαχωρίζεται από την ερμηνεία.', omniP2:'Το αποτέλεσμα μπορεί να δείχνει τελική πιθανότητα, confidence interval, διαφορική ιεράρχηση, probability breakdown και παρόμοια περιστατικά. Έτσι το output γίνεται ελέγξιμο και όχι αδιαφανές.', omniP3:'Τα dual-model ensemble views βοηθούν στην αποτύπωση συμφωνίας και αβεβαιότητας όταν είναι διαθέσιμα.', omniCaption2:'Primary model και dual-model ensemble', omniC1T:'AI-only', omniC1D:'Η εκτίμηση του μοντέλου από εικόνα και κλινικό πλαίσιο πριν το case adjustment.', omniC2T:'Case-adjusted', omniC2D:'Πιθανότητα που επηρεάζεται από παρόμοια επιβεβαιωμένα περιστατικά όταν υπάρχουν.', omniC3T:'Confidence signal', omniC3D:'Πρακτική ένδειξη συμφωνίας και αβεβαιότητας, όχι αντικατάσταση της κλινικής κρίσης.',
+        learnTag:'Learning loop', learnTitle:'Το feedback του ιατρού μπορεί να γίνει μελλοντική νοημοσύνη.', learnLead:'Το feedback hook επιτρέπει αποθήκευση διορθωμένων εκβάσεων και τελικών διαγνώσεων για review πριν μπουν σε trusted case library.', learnH:'Supervised learning intake, όχι αυτόματο self-training.', learnP1:'Μετά από ένα run μπορούν να καταγραφούν agreement, disagreement, τελική διάγνωση, malignant/neoplastic labels και σημειώσεις.', learnP2:'Αυτό υποστηρίζει curated case-intelligence pipeline με την ιατρική επίβλεψη στο κέντρο.', learnCaption:'Case learning intake',
+        toolsTag:'Εστιασμένα εργαλεία', toolsTitle:'Ξεχωριστά εργαλεία για ξεχωριστά κλινικά ερωτήματα.', toolsLead:'Δεν είναι κάθε εργασία εκτίμηση κινδύνου μελανώματος. Το OmniDerma χωρίζει broader differential support, θεραπευτική ανταπόκριση, reasoning και επείγοντα σε εστιασμένα workspaces.', neoH:'Neoplasia / Diff3', neoP:'Τα εστιασμένα risk και differential tools παρέχουν πιθανότητα, συστάσεις και ιεραρχημένες διαγνωστικές σκέψεις, με την ιατρική κρίση στο κέντρο.', neoCaption:'Πιθανότητα · σύσταση · διαφορική', sgtH:'ChatSGT', sgtP:'Το ChatSGT είναι clinical reasoning layer. Είναι σχεδιασμένο να ερμηνεύει πλαίσιο, να αμφισβητεί υποθέσεις, να εντοπίζει αδύναμα σημεία και να κάνει την αβεβαιότητα πιο ορατή.', sgtCaption:'Clinical reasoning layer', treatH:'Treatment Response', treatP:'Το treatment workspace είναι σχεδιασμένο για before-and-after σύγκριση, αξιολόγηση ανταπόκρισης και διαχρονική εκτίμηση θεραπευτικής μεταβολής.', treatCaption:'Before / after clinical comparison',
+        safeTag:'Ασφάλεια και κλιμάκωση', safeTitle:'Η επείγουσα καθοδήγηση είναι escalation-first.', safeLead:'Το Emergency Dermatology Assistant είναι σχεδιασμένο για δομημένο προσανατολισμό, όχι για αυτόνομη επείγουσα διάγνωση. Ασταθείς ασθενείς και red flags απαιτούν άμεση κλιμάκωση βάσει πρωτοκόλλων.', safeH:'Σχεδιασμένο να σέβεται τα κλινικά όρια.', safeP1:'Το emergency output είναι εκπαιδευτικό και υποστηρικτικό. Πρέπει να ερμηνεύεται από κλινικούς και να ελέγχεται με βάση τα τρέχοντα πρωτόκολλα, τους διαθέσιμους πόρους και τη σταθερότητα του ασθενούς.', safeP2:'Η ίδια φιλοσοφία ισχύει σε όλο το OmniDerma: τα outputs υποστηρίζουν την απόφαση, δεν αντικαθιστούν την ιατρική κρίση.', safeCaption:'Escalation-first assistant', discTag:'Ιατρική αποποίηση ευθύνης', discText:'Το OmniDerma είναι physician-led, AI-assisted πλατφόρμα κλινικής υποστήριξης για εκπαιδευτική χρήση και υποστήριξη ροής εργασίας. Δεν παρέχει αυτόνομη ιατρική διάγνωση. Οι κλινικές αποφάσεις πρέπει πάντα να λαμβάνονται από καταρτισμένους επαγγελματίες υγείας με βάση τις ισχύουσες οδηγίες, την άμεση εκτίμηση του ασθενούς και τις κατάλληλες εξετάσεις. Η ιστοπαθολογία παραμένει το gold standard για νεοπλασίες δέρματος όπου ενδείκνυται.', footerCopy:'© 2026 OmniDerma. Με επιφύλαξη παντός δικαιώματος.', footerMeta:'Physician-led · AI-assisted'
+      }
+    };
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>24));
+    const observer = new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.12});
+    document.querySelectorAll('.reveal,.manual-card').forEach(el=>observer.observe(el));
+    const modal=document.getElementById('image-modal'), modalImg=document.getElementById('modal-img'), modalClose=document.querySelector('.image-modal .close');
+    document.querySelectorAll('.screen').forEach(img=>{img.tabIndex=0; img.addEventListener('click',()=>openModal(img)); img.addEventListener('keydown',e=>{if(e.key==='Enter')openModal(img)})});
+    function openModal(img){modal.classList.add('open');modal.setAttribute('aria-hidden','false');modalImg.src=img.src;modalImg.alt=img.alt||'Expanded OmniDerma screenshot'}
+    function closeModal(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');modalImg.src=''}
+    modalClose.addEventListener('click',closeModal); modal.addEventListener('click',e=>{if(e.target===modal)closeModal()}); window.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('open'))closeModal()});
+    function setLanguage(lang){ const t=translations[lang]; document.documentElement.lang=lang==='gr'?'el':'en'; document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n; if(t[k]) el.textContent=t[k]}); document.querySelectorAll('[data-i18n-html]').forEach(el=>{const k=el.dataset.i18nHtml; if(t[k]) el.innerHTML=t[k]}); localStorage.setItem('omniderma-lang',lang); document.querySelectorAll('.lang-toggle button').forEach(b=>b.classList.remove('active')); document.getElementById('lang-'+lang)?.classList.add('active'); }
+    document.getElementById('lang-en')?.addEventListener('click',()=>setLanguage('en')); document.getElementById('lang-gr')?.addEventListener('click',()=>setLanguage('gr')); setLanguage(localStorage.getItem('omniderma-lang')||'en');
+  </script>
+</body>
+</html>
