@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" sizes="32x32" href="../omnilogo_32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../omnilogo_192x192.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OmniDerma — Legal & Platform Policies</title>
+  <meta name="description" content="OmniDerma legal policies, privacy policy, medical disclaimer, data retention, and responsible use documentation." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    :root {
+      --bg:#0a0a0f; --bg-alt:#0e0e14; --panel:#11111a;
+      --text:#f5f2ec; --text-soft:rgba(245,242,236,.66); --text-faint:rgba(245,242,236,.42);
+      --accent:#7c5cbf; --accent-light:#a688e0; --accent-border:rgba(124,92,191,.28);
+      --container: 1080px;
+    }
+    body { margin:0; background:var(--bg); color:var(--text); font-family:'Outfit',sans-serif; font-weight:300; line-height:1.55; overflow-x:hidden; }
+    body::before { content:''; position:fixed; inset:0; pointer-events:none; opacity:.26; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); z-index:0; }
+    a, button { font:inherit; } img { display:block; max-width:100%; } nav, main, footer { position:relative; z-index:1; }
+    .container { max-width:var(--container); margin:0 auto; padding:0 4rem; }
+    nav { position:fixed; inset:0 0 auto 0; display:flex; align-items:center; justify-content:space-between; padding:1.2rem 4rem; border-bottom:1px solid rgba(255,255,255,.08); background:rgba(10,10,15,.82); backdrop-filter:blur(14px); z-index:20; }
+    .nav-brand { display:inline-flex; align-items:center; text-decoration:none; color:var(--text); }
+    .nav-brand img { height:72px; width:auto; }
+    .nav-actions { display:flex; align-items:center; gap:.9rem; }
+    .nav-link, .pill { display:inline-flex; align-items:center; justify-content:center; min-height:44px; padding:.75rem 1.25rem; border-radius:999px; text-decoration:none; font-size:.76rem; letter-spacing:.12em; text-transform:uppercase; transition:background .2s ease, border-color .2s ease, transform .15s ease, color .2s ease; }
+    .nav-link { color:var(--text-faint); border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.02); }
+    .pill { color:var(--accent-light); border:1px solid var(--accent-border); background:rgba(124,92,191,.08); }
+    .nav-link:hover, .pill:hover { transform:translateY(-1px); color:var(--text); border-color:rgba(166,136,224,.45); }
+    .hero { padding:11rem 0 3rem; }
+    .eyebrow { font-family:'DM Mono',monospace; font-size:.74rem; letter-spacing:.22em; text-transform:uppercase; color:var(--accent-light); margin:0 0 1.1rem; }
+    h1 { margin:0; font-family:'Cormorant Garamond',serif; font-weight:300; font-size:clamp(3rem,6vw,5.6rem); line-height:1; letter-spacing:-.02em; }
+    h1 em { color:var(--accent-light); font-style:italic; }
+    .lead { max-width:760px; margin:1.35rem 0 0; color:var(--text-soft); font-size:1.04rem; line-height:1.9; }
+    .quick-jump { display:flex; flex-wrap:wrap; gap:.75rem; margin-top:2.1rem; }
+    .quick-jump a { color:var(--text-soft); text-decoration:none; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.025); border-radius:999px; padding:.72rem 1rem; font-family:'DM Mono',monospace; font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; }
+    .quick-jump a:hover { color:var(--accent-light); border-color:var(--accent-border); background:rgba(124,92,191,.07); }
+    .legal-shell { padding:2rem 0 6rem; }
+    .legal-card { border:1px solid rgba(255,255,255,.08); border-radius:24px; background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.015)); margin:1rem 0; overflow:hidden; transition:border-color .2s ease, background .2s ease; }
+    .legal-card:hover { border-color:rgba(166,136,224,.24); }
+    .legal-card[open] { border-color:var(--accent-border); background:linear-gradient(135deg, rgba(124,92,191,.055), rgba(255,255,255,.018)); }
+    summary { list-style:none; cursor:pointer; position:relative; display:grid; grid-template-columns:1fr auto; gap:.5rem 1.5rem; padding:1.45rem 1.6rem; align-items:center; }
+    summary::-webkit-details-marker { display:none; }
+    .legal-label { grid-column:1; font-family:'DM Mono',monospace; font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--accent-light); }
+    .legal-title { grid-column:1; font-family:'Cormorant Garamond',serif; font-size:1.7rem; line-height:1.12; font-weight:300; color:var(--text); }
+    .legal-date { grid-column:1; color:var(--text-faint); font-size:.86rem; }
+    .legal-plus { grid-column:2; grid-row:1 / span 3; width:38px; height:38px; border-radius:999px; border:1px solid var(--accent-border); color:var(--accent-light); display:flex; align-items:center; justify-content:center; font-size:1.3rem; transition:transform .2s ease, background .2s ease; }
+    details[open] .legal-plus { transform:rotate(45deg); background:rgba(124,92,191,.12); }
+    .legal-content { max-width:850px; padding:0 1.6rem 2rem; color:var(--text-soft); }
+    .legal-content h3 { margin:2rem 0 .65rem; color:var(--text); font-family:'Cormorant Garamond',serif; font-size:1.55rem; font-weight:400; }
+    .legal-content p { margin:.85rem 0; font-size:.96rem; line-height:1.86; }
+    .legal-content ul { margin:.8rem 0 1.1rem; padding-left:1.35rem; color:var(--text-soft); }
+    .legal-content li { margin:.42rem 0; line-height:1.72; }
+    .notice { margin:3rem 0 0; border:1px solid var(--accent-border); border-radius:22px; padding:1.35rem 1.5rem; background:rgba(124,92,191,.055); color:var(--text-soft); }
+    .notice strong { display:block; margin-bottom:.5rem; color:var(--accent-light); font-family:'DM Mono',monospace; font-size:.7rem; letter-spacing:.18em; text-transform:uppercase; }
+    footer { display:flex; justify-content:space-between; align-items:center; gap:1rem; padding:2rem 4rem 2.5rem; border-top:1px solid rgba(255,255,255,.06); color:var(--text-faint); font-size:.8rem; }
+    .footer-brand img { height:74px; width:auto; opacity:.82; }
+    .footer-meta { font-family:'DM Mono',monospace; letter-spacing:.08em; text-transform:uppercase; font-size:.68rem; }
+    @media (max-width:900px) {
+      .container { padding:0 1.2rem; } nav { padding:1rem 1.2rem; } .nav-brand img { height:68px; } .nav-link { display:none; }
+      .hero { padding-top:9.2rem; } summary { padding:1.25rem; } .legal-content { padding:0 1.25rem 1.6rem; } footer { flex-direction:column; text-align:center; padding-left:1.2rem; padding-right:1.2rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/" class="nav-brand" aria-label="OmniDerma home"><img src="../omniderma-logo.png" alt="OmniDerma logo" /></a>
+    <div class="nav-actions">
+      <a href="/" class="nav-link">Landing Page</a>
+      <a href="/app-manual/" class="pill">App Manual</a>
+    </div>
+  </nav>
+  <main>
+    <section class="hero">
+      <div class="container">
+        <p class="eyebrow">Legal documentation</p>
+        <h1>Legal &amp; <em>Platform Policies.</em></h1>
+        <p class="lead">Transparency, responsible AI use, privacy, and professional standards for OmniDerma. These documents are written for approved professional use and should be reviewed before accessing the platform.</p>
+        <div class="quick-jump" aria-label="Legal document shortcuts">
+          <a href="#terms">Terms</a><a href="#privacy">Privacy</a><a href="#medical">Medical Disclaimer</a><a href="#key-points">Key Points</a><a href="#security">Security</a><a href="#retention">Retention</a>
+        </div>
+      </div>
+    </section>
+    <section class="legal-shell">
+      <div class="container">
+
+      <details class="legal-card reveal" id="terms" open>
+        <summary>
+          <span class="legal-label">PLATFORM TERMS</span>
+          <span class="legal-title">Terms of Service</span>
+          <span class="legal-date">Last updated: May 18, 2026</span>
+          <span class="legal-plus" aria-hidden="true">+</span>
+        </summary>
+        <div class="legal-content">
+          <p>Welcome to OmniDerma. These Terms of Service (“Terms”) govern access to and use of the OmniDerma platform, including its web application, AI-assisted analysis systems, patient management tools, reporting features, and related services (collectively, the “Platform”).</p>
+<p>By accessing or using OmniDerma, you agree to these Terms. If you do not agree, you may not use the Platform.</p>
+<h3>1. About OmniDerma</h3>
+<p>OmniDerma is a physician-led AI-assisted dermatology clinical decision-support platform intended to support healthcare professionals in the review and interpretation of dermatologic information.</p>
+<p>The Platform may include, among other features:</p>
+<h3>AI-assisted analytical systems and workflows</h3>
+<h3>Clinical and dermoscopic image analysis</h3>
+<h3>Differential diagnosis support</h3>
+<h3>Patient profile management</h3>
+<h3>PDF report generation</h3>
+<h3>Case review and verification systems</h3>
+<h3>Educational and workflow-assistance tools</h3>
+<p>OmniDerma is designed to assist qualified users and is not intended to replace physician judgment, histopathology, established clinical guidelines, or independent medical decision-making.</p>
+<h3>2. Eligibility and Access</h3>
+<p>Use of OmniDerma is restricted to:</p>
+<h3>Licensed healthcare professionals</h3>
+<h3>Healthcare trainees under appropriate supervision</h3>
+<h3>Authorized clinical or research collaborators</h3>
+<h3>Other users explicitly approved by OmniDerma administrators</h3>
+<p>Access is controlled through an approval-based account system.</p>
+<p>You agree that:</p>
+<h3>All information provided during registration is accurate</h3>
+<ul><li>You will maintain the security of your account</li><li>You are responsible for activity occurring under your account</li><li>You will not share account access with unauthorized individuals</li><li>You will notify OmniDerma promptly of suspected unauthorized access or security concerns</li></ul>
+<p>Authentication may be provided through third-party services, including Google Accounts.</p>
+<p>OmniDerma reserves the right to approve, deny, suspend, restrict, or revoke access at its discretion, particularly in cases involving misuse, security concerns, policy violations, or inappropriate clinical use.</p>
+<h3>3. Intended Use</h3>
+<p>OmniDerma is intended solely as a clinical decision-support and educational support platform.</p>
+<p>The Platform:</p>
+<h3>Does not provide medical diagnoses</h3>
+<h3>Does not replace physician evaluation</h3>
+<ul><li>Does not replace histopathologic confirmation when clinically indicated</li></ul>
+<h3>Does not establish a physician-patient relationship</h3>
+<h3>Is not intended for autonomous medical decision-making</h3>
+<p>Is not intended for emergency medical triage or critical life-support decisions</p>
+<p>All outputs generated by the Platform require interpretation, validation, and independent clinical judgment by a qualified healthcare professional.</p>
+<h3>4. AI and Medical Disclaimer</h3>
+<p>OmniDerma incorporates artificial intelligence and algorithmic analysis systems, including systems that may generate probabilities, differential diagnoses, recommendations, summaries, or other analytical outputs.</p>
+<p>You acknowledge and agree that:</p>
+<ul><li>AI-generated outputs may be incomplete, inaccurate, misleading, or incorrect</li></ul>
+<h3>False positives and false negatives may occur</h3>
+<ul><li>Analytical outputs are probabilistic and informational in nature</li><li>The Platform may fail to detect clinically significant findings</li><li>AI outputs must not be treated as definitive diagnoses</li><li>Clinical decisions remain solely the responsibility of the treating clinician</li></ul>
+<p>Histopathology, biopsy, laboratory evaluation, imaging, specialist consultation, and standard clinical assessment remain the appropriate diagnostic standards where clinically indicated.</p>
+<p>Use of OmniDerma does not eliminate or reduce the clinician’s professional responsibility for patient care.</p>
+<h3>5. User Responsibilities</h3>
+<p>You are solely responsible for your use of the Platform and for ensuring compliance with applicable laws, regulations, ethical obligations, institutional policies, and professional standards.</p>
+<p>You agree that you will:</p>
+<h3>Obtain all necessary patient consents and authorizations</h3>
+<ul><li>Avoid uploading directly identifiable patient information whenever possible</li><li>Use the Platform only for lawful and professionally appropriate purposes</li></ul>
+<h3>Independently verify AI-generated outputs before clinical use</h3>
+<h3>Exercise professional judgment at all times</h3>
+<h3>Maintain confidentiality of patient-related information</h3>
+<p>Comply with applicable privacy and data-protection laws, including the GDPR where applicable</p>
+<p>You must not rely exclusively on OmniDerma for medical decision-making.</p>
+<h3>6. Patient Data and Uploaded Content</h3>
+<p>Users may upload clinical images, dermoscopic images, metadata, notes, and related content (“User Content”) to the Platform.</p>
+<p>You retain ownership of your User Content.</p>
+<p>By uploading content to OmniDerma, you grant OmniDerma a limited license to store, process, analyze, display, and use such content solely for:</p>
+<h3>Operating the Platform</h3>
+<h3>Providing requested analyses and reports</h3>
+<h3>Maintaining system functionality and security</h3>
+<h3>Supporting verification and quality-review workflows</h3>
+<p>Improving platform performance using de-identified or aggregated data where appropriate</p>
+<p>You represent and warrant that:</p>
+<ul><li>You have the legal right to upload the content</li><li>Necessary patient consent has been obtained where required</li><li>Uploaded content complies with applicable laws and professional obligations</li><li>You will make reasonable efforts to avoid unnecessary identifiable patient information</li></ul>
+<p>OmniDerma does not claim ownership over your uploaded clinical materials.</p>
+<h3>7. Acceptable Use</h3>
+<p>You agree not to:</p>
+<h3>Use the Platform unlawfully or fraudulently</h3>
+<h3>Upload malicious software or harmful content</h3>
+<h3>Attempt unauthorized access to systems or accounts</h3>
+<h3>Reverse engineer, probe, or disrupt the Platform</h3>
+<h3>Circumvent access restrictions or security controls</h3>
+<ul><li>Use the Platform to develop competing systems through unauthorized extraction or scraping</li><li>Upload content unrelated to legitimate clinical, educational, or authorized use</li></ul>
+<h3>Misrepresent AI outputs as definitive medical conclusions</h3>
+<p>OmniDerma reserves the right to investigate misuse and take appropriate action, including suspension or termination of access.</p>
+<h3>8. Platform Availability and Modifications</h3>
+<p>OmniDerma is an evolving software platform.</p>
+<p>We may:</p>
+<h3>Modify features or functionality</h3>
+<h3>Add or remove tools</h3>
+<h3>Perform maintenance</h3>
+<h3>Update AI systems or workflows</h3>
+<h3>Temporarily suspend availability</h3>
+<h3>Introduce experimental or beta features</h3>
+<p>While reasonable efforts are made to maintain platform availability and integrity, OmniDerma does not guarantee uninterrupted access, error-free operation, or continuous uptime.</p>
+<h3>9. Security</h3>
+<p>OmniDerma implements reasonable technical and organizational measures intended to protect platform data and system integrity.</p>
+<p>However, no digital platform or internet-based service can guarantee absolute security.</p>
+<p>Users are responsible for:</p>
+<h3>Maintaining device security</h3>
+<h3>Protecting account credentials</h3>
+<h3>Using secure clinical environments</h3>
+<h3>Avoiding unauthorized disclosure of sensitive information</h3>
+<h3>10. Limitation of Liability</h3>
+<p>To the maximum extent permitted by applicable law:</p>
+<p>OmniDerma and its operators, developers, affiliates, contributors, and licensors shall not be liable for:</p>
+<h3>Clinical decisions made by users</h3>
+<h3>Diagnostic or treatment outcomes</h3>
+<h3>Reliance on AI-generated outputs</h3>
+<h3>Data loss or interruption of service</h3>
+<h3>Indirect, incidental, consequential, special, or punitive damages</h3>
+<p>Loss of revenue, professional opportunity, goodwill, or data</p>
+<p>The Platform is provided on an “as available” and “as is” basis without warranties of any kind, whether express or implied.</p>
+<p>Nothing in these Terms excludes liability that cannot legally be excluded under applicable law.</p>
+<h3>11. Suspension and Termination</h3>
+<p>OmniDerma may suspend, restrict, or terminate access to the Platform at any time, including where:</p>
+<h3>These Terms are violated</h3>
+<h3>Platform misuse is suspected</h3>
+<h3>Security concerns arise</h3>
+<h3>Access is no longer appropriate</h3>
+<h3>Administrative approval is withdrawn</h3>
+<p>Users may discontinue use of the Platform at any time.</p>
+<p>Certain provisions of these Terms, including liability limitations and data-related provisions, shall survive termination where applicable.</p>
+<h3>12. Intellectual Property</h3>
+<p>The OmniDerma Platform, including its software, branding, interface design, workflows, text, graphics, and proprietary systems, is protected by applicable intellectual property laws.</p>
+<p>Except as expressly permitted, users may not reproduce, distribute, modify, reverse engineer, or commercially exploit Platform materials without authorization.</p>
+<p>User-uploaded clinical content remains the property of the respective user or rights holder.</p>
+<h3>13. Privacy</h3>
+<p>Use of the Platform is also governed by the OmniDerma Privacy Policy.</p>
+<p>Users should review the Privacy Policy carefully to understand how information is collected, processed, stored, and protected.</p>
+<h3>14. Changes to These Terms</h3>
+<p>OmniDerma may update these Terms periodically.</p>
+<p>Updated versions will be posted through the Platform or associated websites. Continued use of the Platform after updates become effective constitutes acceptance of the revised Terms.</p>
+<h3>15. Governing Law</h3>
+<p>These Terms shall be governed by and interpreted in accordance with the laws applicable in Greece and, where applicable, relevant European Union regulations.</p>
+<h3>16. Contact Information</h3>
+<p>For questions regarding these Terms or the OmniDerma Platform, contact:</p>
+<ul><li>OmniDerma
+Website: omniderma.health</li></ul>
+<h3>Email: info@omniderma.health</h3>
+        </div>
+      </details>
+      <details class="legal-card reveal" id="privacy">
+        <summary>
+          <span class="legal-label">DATA &amp; GDPR</span>
+          <span class="legal-title">Privacy Policy</span>
+          <span class="legal-date">Last updated: May 18, 2026</span>
+          <span class="legal-plus" aria-hidden="true">+</span>
+        </summary>
+        <div class="legal-content">
+          <p>This Privacy Policy explains how OmniDerma collects, uses, stores, and protects information through the OmniDerma platform and related services (the “Platform”).</p>
+<p>OmniDerma is a physician-led AI-assisted dermatology clinical decision-support platform intended for use by approved healthcare professionals and authorized users.</p>
+<p>By using the Platform, you acknowledge and agree to the practices described in this Privacy Policy.</p>
+<h3>1. Scope of This Policy</h3>
+<p>This Privacy Policy applies to information processed through OmniDerma, including:</p>
+<h3>User account information</h3>
+<h3>Uploaded clinical and dermoscopic images</h3>
+<h3>Patient-related metadata</h3>
+<h3>AI-generated outputs and reports</h3>
+<h3>Technical and usage information</h3>
+<h3>Communications related to platform administration and security</h3>
+<p>This Policy should be read together with the OmniDerma Terms of Service.</p>
+<h3>2. Data Controller</h3>
+<p>At this stage, OmniDerma is operated as an independent physician-led platform.</p>
+<p>For questions regarding privacy or data handling, users may contact:</p>
+<ul><li>OmniDerma
+Website: OmniDerma Health</li></ul>
+<p>A dedicated privacy or legal contact email may be added in the future.</p>
+<h3>3. Information We Collect</h3>
+<h3>3.1 Account Information</h3>
+<p>When users create or access an account through authentication providers such as Google Accounts, OmniDerma may collect:</p>
+<h3>Name</h3>
+<h3>Email address</h3>
+<h3>Authentication identifiers</h3>
+<h3>Profile-related account information</h3>
+<h3>3.2 Clinical Content and Uploaded Data</h3>
+<p>Users may upload content including:</p>
+<h3>Clinical photographs</h3>
+<h3>Dermoscopic images</h3>
+<h3>Non-identifiable patient metadata</h3>
+<h3>Clinical notes</h3>
+<h3>AI feedback and review submissions</h3>
+<h3>Generated reports and analytical outputs</h3>
+<p>Users are responsible for minimizing identifiable patient information whenever possible.</p>
+<h3>3.3 AI-Generated Data</h3>
+<p>The Platform may generate:</p>
+<h3>Differential diagnoses</h3>
+<h3>Risk assessments</h3>
+<h3>AI-generated summaries</h3>
+<h3>Probabilistic outputs</h3>
+<h3>Workflow-support recommendations</h3>
+<h3>Verification and feedback metadata</h3>
+<p>These outputs may be stored as part of platform functionality and quality-improvement workflows.</p>
+<h3>3.4 Technical and Usage Information</h3>
+<p>OmniDerma may automatically collect technical information including:</p>
+<h3>IP address</h3>
+<h3>Browser and device information</h3>
+<h3>Operating system information</h3>
+<h3>Access timestamps</h3>
+<h3>Platform activity logs</h3>
+<h3>Error and security logs</h3>
+<p>This information helps maintain platform functionality, reliability, and security.</p>
+<h3>4. How Information Is Used</h3>
+<p>OmniDerma may use collected information to:</p>
+<h3>Provide and operate platform functionality</h3>
+<h3>Generate AI-assisted analytical outputs</h3>
+<h3>Maintain patient and clinician workflows</h3>
+<h3>Generate reports and PDFs</h3>
+<h3>Authenticate users and manage access</h3>
+<h3>Improve platform performance and reliability</h3>
+<h3>Support verification, review, and quality-control systems</h3>
+<h3>Monitor for misuse, abuse, or security threats</h3>
+<h3>Comply with legal or regulatory obligations</h3>
+<p>Where appropriate, OmniDerma may use de-identified or aggregated information to improve system performance and internal validation processes.</p>
+<h3>5. AI Processing and Automated Systems</h3>
+<p>OmniDerma uses artificial intelligence and algorithmic systems to assist with dermatologic workflow support and clinical analysis.</p>
+<p>Uploaded data may be processed by AI systems in order to generate:</p>
+<h3>Risk estimations</h3>
+<h3>Differential diagnoses</h3>
+<h3>Analytical summaries</h3>
+<h3>Clinical support outputs</h3>
+<p>Users acknowledge that:</p>
+<h3>AI-generated outputs may be inaccurate or incomplete</h3>
+<h3>AI systems do not replace physician judgment</h3>
+<ul><li>All outputs require independent clinical interpretation and validation</li><li>The Platform is intended as decision support, not autonomous diagnosis</li></ul>
+<p>OmniDerma does not guarantee the accuracy, completeness, or clinical suitability of AI-generated outputs.</p>
+<h3>6. Legal Basis for Processing (GDPR)</h3>
+<p>Where the General Data Protection Regulation (GDPR) applies, OmniDerma processes information on legal bases that may include:</p>
+<h3>Performance of services requested by users</h3>
+<ul><li>Legitimate interests related to platform operation, security, and improvement</li></ul>
+<h3>User consent where applicable</h3>
+<h3>Compliance with legal obligations</h3>
+<p>Users remain responsible for ensuring that uploaded clinical information is lawfully obtained and appropriately handled under applicable laws and institutional requirements.</p>
+<h3>7. Patient Consent and User Responsibility</h3>
+<p>Users are solely responsible for:</p>
+<h3>Obtaining appropriate patient consent</h3>
+<h3>Ensuring lawful use of clinical materials</h3>
+<h3>Avoiding unnecessary identifiable patient information</h3>
+<h3>Complying with applicable medical confidentiality obligations</h3>
+<p>Complying with GDPR and other applicable privacy laws</p>
+<p>Users should make reasonable efforts to avoid uploading:</p>
+<h3>Patient names</h3>
+<h3>Dates of birth</h3>
+<h3>Identification numbers</h3>
+<h3>Contact information</h3>
+<h3>Identifiable documents</h3>
+<h3>Unnecessary facial or identifying features where avoidable</h3>
+<h3>8. Data Sharing and Third-Party Services</h3>
+<p>OmniDerma may rely on third-party infrastructure and service providers necessary for platform operation, including services related to:</p>
+<h3>Hosting and deployment</h3>
+<h3>Authentication</h3>
+<h3>Cloud infrastructure</h3>
+<h3>Database storage</h3>
+<h3>Security and monitoring</h3>
+<p>Current infrastructure may include services provided by:</p>
+<h3>Render</h3>
+<h3>PostgreSQL</h3>
+<h3>Google Authentication Services</h3>
+<p>OmniDerma does not sell personal information or uploaded clinical data.</p>
+<p>Information may be disclosed where legally required or necessary to protect platform integrity, security, or legal rights.</p>
+<h3>9. Data Retention</h3>
+<p>OmniDerma retains information for as long as reasonably necessary to:</p>
+<h3>Operate the Platform</h3>
+<h3>Maintain account functionality</h3>
+<h3>Support clinical workflows</h3>
+<h3>Preserve system integrity and security</h3>
+<h3>Comply with legal obligations</h3>
+<p>Retention periods may vary depending on operational, legal, and security requirements.</p>
+<p>Users may request deletion of account-related information, subject to applicable legal, security, or operational limitations.</p>
+<h3>10. Security Measures</h3>
+<p>OmniDerma implements reasonable technical and organizational safeguards intended to protect information, including measures related to:</p>
+<h3>Access control</h3>
+<h3>Authentication</h3>
+<h3>Encrypted data transmission where applicable</h3>
+<h3>Administrative access restrictions</h3>
+<h3>Platform monitoring and logging</h3>
+<p>However, no online service or storage system can guarantee absolute security.</p>
+<p>Users are responsible for maintaining secure devices, credentials, and clinical environments.</p>
+<h3>11. International Data Transfers</h3>
+<p>Depending on infrastructure providers and service configurations, information may be processed or stored in jurisdictions outside the user’s country of residence.</p>
+<p>Where applicable, OmniDerma aims to use service providers and safeguards appropriate for GDPR-aware operations.</p>
+<h3>12. User Rights (GDPR)</h3>
+<p>Where applicable under GDPR or related laws, users may have rights including:</p>
+<h3>Access to personal information</h3>
+<h3>Correction of inaccurate information</h3>
+<h3>Deletion of certain information</h3>
+<h3>Restriction of processing</h3>
+<h3>Objection to certain processing activities</h3>
+<h3>Data portability rights</h3>
+<p>Requests may be subject to legal, ethical, security, or operational limitations.</p>
+<h3>13. Children and Minors</h3>
+<p>OmniDerma is intended solely for professional or authorized use and is not directed toward children or minors.</p>
+<h3>14. Platform Evolution and Policy Updates</h3>
+<p>OmniDerma is an evolving platform, and this Privacy Policy may be updated periodically to reflect operational, legal, technical, or regulatory changes.</p>
+<p>Updated versions will be published through the Platform or associated websites.</p>
+<p>Continued use of the Platform after updates become effective constitutes acceptance of the revised Policy.</p>
+<h3>15. Contact Information</h3>
+<p>For questions regarding this Privacy Policy or data handling practices, contact:</p>
+<ul><li>OmniDerma
+Website: omniderma.health</li></ul>
+<h3>Email: info@omniderma.health</h3>
+        </div>
+      </details>
+      <details class="legal-card reveal" id="medical">
+        <summary>
+          <span class="legal-label">CLINICAL SAFETY</span>
+          <span class="legal-title">Medical Disclaimer</span>
+          <span class="legal-date">Last updated: May 18, 2026</span>
+          <span class="legal-plus" aria-hidden="true">+</span>
+        </summary>
+        <div class="legal-content">
+          <p>OmniDerma is a physician-led AI-assisted dermatology clinical decision-support platform.</p>
+<p>The Platform is intended solely to assist qualified healthcare professionals and authorized users through workflow support, analytical tools, and educational assistance.</p>
+<h3>Not a Diagnostic Authority</h3>
+<p>OmniDerma does not provide definitive medical diagnoses.</p>
+<p>The Platform does not replace:</p>
+<h3>Physician judgment</h3>
+<h3>Clinical evaluation</h3>
+<h3>Histopathology</h3>
+<h3>Laboratory testing</h3>
+<h3>Imaging</h3>
+<h3>Specialist consultation</h3>
+<h3>Standard medical practice</h3>
+<p>All outputs generated by OmniDerma require independent interpretation and validation by a qualified healthcare professional.</p>
+<h3>AI Limitations</h3>
+<p>OmniDerma incorporates artificial intelligence and algorithmic systems that may generate:</p>
+<h3>Differential diagnoses</h3>
+<h3>Risk estimations</h3>
+<h3>Clinical summaries</h3>
+<h3>Probabilistic outputs</h3>
+<h3>Workflow-support suggestions</h3>
+<p>AI-generated outputs may be:</p>
+<h3>Incorrect</h3>
+<h3>Incomplete</h3>
+<h3>Inconsistent</h3>
+<h3>Misleading</h3>
+<h3>Clinically inappropriate in certain contexts</h3>
+<p>False positives and false negatives may occur.</p>
+<p>The Platform may fail to detect clinically significant findings.</p>
+<h3>Human Oversight Is Required</h3>
+<p>OmniDerma is intended for human-supervised professional use only.</p>
+<p>Clinical decisions must not be based solely on AI-generated outputs.</p>
+<p>The treating clinician remains solely responsible for:</p>
+<h3>Clinical interpretation</h3>
+<h3>Diagnostic decisions</h3>
+<h3>Treatment planning</h3>
+<h3>Follow-up decisions</h3>
+<h3>Escalation of care</h3>
+<h3>Patient communication</h3>
+<h3>Histopathology Remains the Gold Standard</h3>
+<p>Where clinically indicated, biopsy and histopathologic evaluation remain the appropriate diagnostic standards for neoplastic and other dermatologic conditions.</p>
+<p>OmniDerma is not intended to replace histopathology.</p>
+<h3>No Emergency or Autonomous Use</h3>
+<p>OmniDerma is not intended for:</p>
+<h3>Emergency medical triage</h3>
+<h3>Autonomous diagnosis</h3>
+<h3>Autonomous treatment decisions</h3>
+<h3>Critical life-support decisions</h3>
+<h3>Unsupervised patient-facing use</h3>
+<h3>Educational and Supportive Nature</h3>
+<p>The Platform is intended to support clinical workflows and education.</p>
+<p>Analytical outputs should be considered supportive information rather than definitive conclusions.</p>
+<h3>User Responsibility</h3>
+<p>Users are responsible for:</p>
+<h3>Exercising independent clinical judgment</h3>
+<h3>Verifying outputs appropriately</h3>
+<h3>Obtaining patient consent where required</h3>
+<h3>Using the Platform lawfully and ethically</h3>
+<h3>Complying with applicable professional and privacy obligations</h3>
+        </div>
+      </details>
+      <details class="legal-card reveal" id="key-points">
+        <summary>
+          <span class="legal-label">ONBOARDING SUMMARY</span>
+          <span class="legal-title">Key Points Before Using OmniDerma</span>
+          <span class="legal-date">Last updated: May 18, 2026</span>
+          <span class="legal-plus" aria-hidden="true">+</span>
+        </summary>
+        <div class="legal-content">
+          <p>Welcome to OmniDerma.</p>
+<p>Before using the Platform, please review the following important points carefully.</p>
+<p>OmniDerma Is a Clinical Decision-Support Platform</p>
+<p>OmniDerma is designed to assist healthcare professionals through AI-assisted dermatology workflows and analytical tools.</p>
+<p>The Platform is intended to support — not replace — physician judgment, clinical evaluation, histopathology, or established medical standards of care.</p>
+<h3>AI Outputs May Be Incorrect</h3>
+<p>OmniDerma uses artificial intelligence systems that may generate:</p>
+<h3>Risk estimations</h3>
+<h3>Differential diagnoses</h3>
+<h3>Analytical summaries</h3>
+<h3>Clinical support outputs</h3>
+<p>AI-generated outputs may be incomplete, inaccurate, or misleading.</p>
+<p>False positives and false negatives can occur.</p>
+<p>All outputs require independent interpretation and validation by a qualified healthcare professional.</p>
+<h3>Clinical Responsibility Remains With the User</h3>
+<p>Use of OmniDerma does not transfer clinical responsibility to the Platform.</p>
+<p>Users remain solely responsible for:</p>
+<h3>Clinical decisions</h3>
+<h3>Diagnostic interpretation</h3>
+<h3>Treatment planning</h3>
+<h3>Patient communication</h3>
+<h3>Follow-up and escalation decisions</h3>
+<p>Biopsy, histopathology, laboratory evaluation, imaging, and specialist consultation remain appropriate where clinically indicated.</p>
+<h3>Avoid Uploading Identifiable Patient Information</h3>
+<p>Users should make reasonable efforts to avoid uploading directly identifiable patient information whenever possible.</p>
+<p>Please avoid including:</p>
+<h3>Patient names</h3>
+<h3>Dates of birth</h3>
+<h3>Identification numbers</h3>
+<h3>Contact information</h3>
+<h3>Identifiable documents</h3>
+<h3>Unnecessary identifying features</h3>
+<p>Users are responsible for obtaining appropriate patient consent and complying with applicable privacy laws and professional obligations.</p>
+<h3>Approved Use Only</h3>
+<p>OmniDerma is intended for approved users, including healthcare professionals and authorized collaborators.</p>
+<p>Unauthorized access, misuse, credential sharing, or attempts to bypass security controls are prohibited.</p>
+<h3>Platform Availability</h3>
+<p>OmniDerma is an evolving platform.</p>
+<p>Features, workflows, and AI systems may change over time, and occasional interruptions or maintenance periods may occur.</p>
+<h3>Privacy and Security</h3>
+<p>OmniDerma implements reasonable safeguards intended to protect platform integrity and stored information.</p>
+<p>However, no online system can guarantee absolute security.</p>
+<p>Users are responsible for maintaining secure devices, account credentials, and appropriate clinical environments.</p>
+<h3>Acceptance</h3>
+<p>By continuing to use OmniDerma, you acknowledge that you have read and understood:</p>
+<h3>The Terms of Service</h3>
+<h3>The Privacy Policy</h3>
+<h3>The Medical Disclaimer</h3>
+<p>and agree to use the Platform responsibly and professionally.</p>
+        </div>
+      </details>
+      <details class="legal-card reveal" id="security">
+        <summary>
+          <span class="legal-label">SECURITY</span>
+          <span class="legal-title">Security &amp; Responsible Use</span>
+          <span class="legal-date">Last updated: May 18, 2026</span>
+          <span class="legal-plus" aria-hidden="true">+</span>
+        </summary>
+        <div class="legal-content">
+          <p>OmniDerma is designed as a physician-oriented AI-assisted clinical decision-support platform intended for responsible professional use.</p>
+<p>This page outlines important security expectations and responsible-use principles for all users of OmniDerma.</p>
+<h3>1. Professional Use Expectations</h3>
+<p>OmniDerma is intended for:</p>
+<h3>Healthcare professionals</h3>
+<h3>Authorized trainees</h3>
+<h3>Approved collaborators</h3>
+<h3>Authorized educational or research use</h3>
+<p>Users are expected to use the Platform professionally, ethically, and lawfully.</p>
+<h3>2. Account Security</h3>
+<p>Users are responsible for:</p>
+<h3>Maintaining secure passwords and authentication methods</h3>
+<h3>Protecting account access</h3>
+<h3>Preventing unauthorized account use</h3>
+<h3>Logging out of shared or public devices</h3>
+<h3>Reporting suspected security concerns promptly</h3>
+<p>Credential sharing is prohibited.</p>
+<h3>3. Responsible Clinical Use</h3>
+<p>Users must:</p>
+<h3>Independently verify AI-generated outputs</h3>
+<h3>Exercise professional judgment at all times</h3>
+<h3>Avoid relying exclusively on AI analysis</h3>
+<h3>Use appropriate clinical escalation when indicated</h3>
+<h3>Continue following established medical standards of care</h3>
+<p>OmniDerma is not intended to replace histopathology, physician judgment, or specialist consultation.</p>
+<h3>4. Patient Privacy and Data Minimization</h3>
+<p>Users should make reasonable efforts to avoid uploading directly identifiable patient information whenever possible.</p>
+<p>Avoid uploading:</p>
+<h3>Names</h3>
+<h3>Dates of birth</h3>
+<h3>Identification numbers</h3>
+<h3>Contact details</h3>
+<h3>Identifiable documents</h3>
+<h3>Unnecessary identifying features</h3>
+<p>Users remain responsible for obtaining appropriate patient consent and complying with applicable privacy obligations.</p>
+<h3>5. Platform Security</h3>
+<p>OmniDerma implements reasonable safeguards intended to support platform integrity and data protection, including measures related to:</p>
+<h3>Access control</h3>
+<h3>Authentication</h3>
+<h3>Administrative restrictions</h3>
+<h3>Monitoring and logging</h3>
+<h3>Infrastructure security</h3>
+<p>However, no digital system can guarantee absolute security.</p>
+<h3>6. Prohibited Activities</h3>
+<p>Users must not:</p>
+<h3>Attempt unauthorized access</h3>
+<h3>Circumvent platform restrictions</h3>
+<h3>Reverse engineer systems</h3>
+<h3>Upload malicious files or code</h3>
+<h3>Misuse AI-generated outputs</h3>
+<h3>Scrape or extract platform data without authorization</h3>
+<h3>Use the Platform for unlawful purposes</h3>
+<h3>Share access with unauthorized individuals</h3>
+<h3>7. AI Transparency and Limitations</h3>
+<p>AI-generated outputs may be inaccurate, incomplete, or clinically inappropriate in certain contexts.</p>
+<p>False positives and false negatives may occur.</p>
+<p>All outputs require human oversight and independent clinical interpretation.</p>
+<h3>8. Reporting Concerns</h3>
+<p>Users are encouraged to report:</p>
+<h3>Security concerns</h3>
+<h3>Suspected unauthorized access</h3>
+<h3>Technical vulnerabilities</h3>
+<h3>Platform misuse</h3>
+<h3>Significant AI-output concerns</h3>
+<p>This helps improve platform reliability, safety, and integrity over time.</p>
+<h3>9. Evolving Security Practices</h3>
+<p>As OmniDerma evolves, security measures, workflows, and operational policies may continue to develop and improve over time.</p>
+        </div>
+      </details>
+      <details class="legal-card reveal" id="retention">
+        <summary>
+          <span class="legal-label">RETENTION</span>
+          <span class="legal-title">Data Retention Policy</span>
+          <span class="legal-date">Last updated: May 18, 2026</span>
+          <span class="legal-plus" aria-hidden="true">+</span>
+        </summary>
+        <div class="legal-content">
+          <p>This Data Retention Policy describes the general principles used by OmniDerma regarding storage and retention of platform-related information.</p>
+<h3>1. Purpose</h3>
+<p>OmniDerma retains certain information in order to:</p>
+<h3>Operate platform functionality</h3>
+<h3>Maintain user accounts</h3>
+<h3>Support clinical workflows</h3>
+<h3>Preserve system integrity and security</h3>
+<h3>Improve platform reliability</h3>
+<h3>Comply with applicable legal obligations</h3>
+<p>Retention practices may evolve as the Platform develops.</p>
+<h3>2. Categories of Stored Information</h3>
+<p>Information retained by OmniDerma may include:</p>
+<h3>User account information</h3>
+<h3>Authentication-related data</h3>
+<h3>Uploaded clinical and dermoscopic images</h3>
+<h3>Non-identifiable patient metadata</h3>
+<h3>AI-generated outputs and reports</h3>
+<h3>Feedback and verification records</h3>
+<h3>Technical logs and security events</h3>
+<h3>3. General Retention Principles</h3>
+<p>OmniDerma aims to retain information only for as long as reasonably necessary for operational, clinical, security, or legal purposes.</p>
+<p>Retention duration may depend on factors including:</p>
+<h3>Active platform usage</h3>
+<h3>Security monitoring requirements</h3>
+<h3>Clinical workflow continuity</h3>
+<h3>System backup practices</h3>
+<h3>Legal or regulatory obligations</h3>
+<h3>4. User Accounts</h3>
+<p>Account-related information may remain stored while an account is active or administratively maintained.</p>
+<p>Accounts that are inactive, revoked, or removed may continue to exist in backups or administrative records for a reasonable period where necessary for:</p>
+<h3>Security</h3>
+<h3>Abuse prevention</h3>
+<h3>Auditability</h3>
+<h3>System recovery</h3>
+<h3>Legal compliance</h3>
+<h3>5. Uploaded Clinical Content</h3>
+<p>Uploaded images, metadata, reports, and related analysis data may be retained in order to:</p>
+<h3>Preserve workflow continuity</h3>
+<h3>Maintain historical records</h3>
+<h3>Support verification systems</h3>
+<h3>Improve internal quality-control processes</h3>
+<h3>Maintain platform functionality</h3>
+<p>Users should avoid uploading directly identifiable patient information whenever possible.</p>
+<h3>6. AI Outputs and Verification Systems</h3>
+<p>AI-generated outputs, clinician feedback, and verification workflows may be retained for:</p>
+<h3>Internal quality improvement</h3>
+<h3>System validation</h3>
+<h3>Performance monitoring</h3>
+<h3>Case-review workflows</h3>
+<p>Educational and analytical purposes using de-identified information where appropriate</p>
+<h3>7. Security and Technical Logs</h3>
+<p>Technical logs, authentication logs, and security-related records may be retained for operational and security purposes, including:</p>
+<h3>Detecting unauthorized access</h3>
+<h3>Investigating misuse</h3>
+<h3>Diagnosing technical problems</h3>
+<h3>Preserving platform integrity</h3>
+<h3>8. Deletion Requests</h3>
+<p>Users may request deletion of account-related information, subject to:</p>
+<h3>Security requirements</h3>
+<h3>Operational limitations</h3>
+<h3>Backup retention cycles</h3>
+<h3>Legal obligations</h3>
+<h3>Legitimate administrative needs</h3>
+<p>Deletion from active systems may not immediately remove information from backups or archived systems.</p>
+<h3>9. Future Policy Updates</h3>
+<p>As OmniDerma evolves, more detailed retention schedules and operational policies may be introduced.</p>
+<p>Updated versions of this Policy may be published periodically.</p>
+        </div>
+      </details>
+        <div class="notice">
+          <strong>Questions regarding legal or privacy matters?</strong>
+          Contact: <a href="mailto:info@omniderma.health" style="color:var(--accent-light);">info@omniderma.health</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="footer-brand"><img src="../omniderma-logo.png" alt="OmniDerma footer logo" /></div>
+    <div>© 2026 OmniDerma. All rights reserved.</div>
+    <div class="footer-meta">Physician-led · AI-assisted</div>
+  </footer>
+</body>
+</html>

@@ -727,6 +727,30 @@
       text-transform: uppercase;
       font-size: .68rem;
     }
+    .footer-center {
+      display: grid;
+      gap: .45rem;
+      justify-items: center;
+    }
+    .footer-legal {
+      color: var(--accent-light);
+      text-decoration: none;
+      font-family: 'DM Mono', monospace;
+      font-size: .68rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      border: 1px solid var(--accent-border);
+      border-radius: 999px;
+      padding: .35rem .72rem;
+      background: rgba(124,92,191,.06);
+      transition: background .2s ease, border-color .2s ease, transform .15s ease;
+    }
+    .footer-legal:hover,
+    .footer-legal:focus-visible {
+      background: rgba(124,92,191,.12);
+      border-color: rgba(166,136,224,.45);
+      transform: translateY(-1px);
+    }
 
     .reveal {
       opacity: 0;
@@ -1109,7 +1133,10 @@
     <div class="footer-brand">
       <img src="omniderma-logo.png" alt="OmniDerma footer logo" />
     </div>
-    <div id="footer-copy">© 2026 OmniDerma. All rights reserved.</div>
+    <div class="footer-center">
+      <div id="footer-copy">© 2026 OmniDerma. All rights reserved.</div>
+      <a href="/legal/" class="footer-legal" id="footer-legal">Legal</a>
+    </div>
     <div class="footer-meta" id="footer-meta">Physician-led · AI-assisted</div>
   </footer>
 
@@ -1271,6 +1298,7 @@
         disc3: "AI-generated analyses may be inaccurate or incomplete. Clinical decisions must always be based on current medical guidelines, physician judgment, and individual patient context.",
 
         footerCopy: "© 2026 OmniDerma. All rights reserved.",
+        footerLegal: "Legal",
         footerMeta: "Physician-led · AI-assisted"
       },
 
@@ -1363,6 +1391,7 @@
         disc3: "Οι αναλύσεις που παράγονται από AI ενδέχεται να είναι ανακριβείς ή ελλιπείς. Οι κλινικές αποφάσεις πρέπει πάντοτε να βασίζονται στις ισχύουσες κατευθυντήριες οδηγίες, στην ιατρική κρίση και στο εκάστοτε ατομικό κλινικό πλαίσιο.",
 
         footerCopy: "© 2026 OmniDerma. Με επιφύλαξη παντός δικαιώματος.",
+        footerLegal: "Νομικά",
         footerMeta: "Physician-led · AI-assisted"
       }
     };
@@ -1466,6 +1495,7 @@
       setText("disc-3", t.disc3);
 
       setText("footer-copy", t.footerCopy);
+      setText("footer-legal", t.footerLegal);
       setText("footer-meta", t.footerMeta);
 
       localStorage.setItem("omniderma-lang", lang);
