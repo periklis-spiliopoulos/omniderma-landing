@@ -55,6 +55,19 @@
     .legal-content p { margin:.85rem 0; font-size:.96rem; line-height:1.86; }
     .legal-content ul { margin:.8rem 0 1.1rem; padding-left:1.35rem; color:var(--text-soft); }
     .legal-content li { margin:.42rem 0; line-height:1.72; }
+    .disclosure-grid { display:grid; grid-template-columns:minmax(220px, 300px) 1fr; border-top:1px solid rgba(255,255,255,.07); margin-top:1.2rem; }
+    .disclosure-grid > div { padding:.85rem 0; border-bottom:1px solid rgba(255,255,255,.07); }
+    .disclosure-key { font-family:'DM Mono',monospace; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--accent-light); padding-right:1.2rem; }
+    .disclosure-key, .disclosure-val { display:flex; flex-direction:column; }
+    .disclosure-val { font-size:.95rem; color:var(--text); line-height:1.6; }
+    body[data-lang="en"] .l-gr, body[data-lang="gr"] .l-en { display:none; }
+    body[data-lang="en"] .disclosure-grid .l-gr, body[data-lang="gr"] .disclosure-grid .l-en { display:block; order:2; font-size:.85em; color:var(--text-faint); margin-top:.12rem; }
+    .lang-toggle { display:flex; gap:6px; align-items:center; }
+    .lang-toggle button { background:transparent; color:var(--text-faint); border:1px solid rgba(255,255,255,.15); padding:5px 10px; border-radius:999px; font-size:.7rem; letter-spacing:.1em; cursor:pointer; transition:all .2s ease; }
+    .lang-toggle button:hover, .lang-toggle button:focus-visible { color:var(--accent-light); border-color:var(--accent-border); }
+    .lang-toggle button.active { color:var(--accent-light); border-color:var(--accent-light); background:rgba(124,92,191,.12); }
+    .disclosure-note { margin-top:1.4rem; color:var(--text-faint); font-size:.82rem; line-height:1.7; }
+    @media (max-width:700px) { .disclosure-grid { grid-template-columns:1fr; } .disclosure-grid > div.disclosure-key { border-bottom:none; padding-bottom:.15rem; } }
     .notice { margin:3rem 0 0; border:1px solid var(--accent-border); border-radius:22px; padding:1.35rem 1.5rem; background:rgba(124,92,191,.055); color:var(--text-soft); }
     .notice strong { display:block; margin-bottom:.5rem; color:var(--accent-light); font-family:'DM Mono',monospace; font-size:.7rem; letter-spacing:.18em; text-transform:uppercase; }
     footer { display:flex; justify-content:space-between; align-items:center; gap:1rem; padding:2rem 4rem 2.5rem; border-top:1px solid rgba(255,255,255,.06); color:var(--text-faint); font-size:.8rem; }
@@ -66,33 +79,81 @@
     }
   </style>
 </head>
-<body>
+<body data-lang="en">
   <nav>
     <a href="/" class="nav-brand" aria-label="OmniDerma home"><img src="../omniderma-logo.png" alt="OmniDerma logo" /></a>
     <div class="nav-actions">
-      <a href="/" class="nav-link">Landing Page</a>
-      <a href="/app-manual/" class="pill">App Manual</a>
+      <div class="lang-toggle" aria-label="Language selection"><button id="lang-en" type="button">EN</button><button id="lang-gr" type="button">GR</button></div>
+      <a href="/" class="nav-link"><span class="l-en">Landing Page</span><span class="l-gr">Αρχική Σελίδα</span></a>
+      <a href="/app-manual/" class="pill"><span class="l-en">App Manual</span><span class="l-gr">Οδηγός Εφαρμογής</span></a>
     </div>
   </nav>
   <main>
     <section class="hero">
       <div class="container">
-        <p class="eyebrow">Legal documentation</p>
-        <h1>Legal &amp; <em>Platform Policies.</em></h1>
-        <p class="lead">Transparency, responsible AI use, privacy, and professional standards for OmniDerma. These documents are written for approved professional use and should be reviewed before accessing the platform.</p>
+        <p class="eyebrow"><span class="l-en">Legal documentation</span><span class="l-gr">Νομική τεκμηρίωση</span></p>
+        <h1><span class="l-en">Legal &amp; <em>Platform Policies.</em></span><span class="l-gr">Νομικά &amp; <em>Πολιτικές Πλατφόρμας.</em></span></h1>
+        <p class="lead"><span class="l-en">Transparency, responsible AI use, privacy, and professional standards for OmniDerma. These documents are written for approved professional use and should be reviewed before accessing the platform.</span><span class="l-gr">Διαφάνεια, υπεύθυνη χρήση AI, απόρρητο και επαγγελματικά πρότυπα για το OmniDerma. Τα έγγραφα αυτά απευθύνονται σε εγκεκριμένη επαγγελματική χρήση και θα πρέπει να μελετηθούν πριν από την πρόσβαση στην πλατφόρμα. Τα πλήρη νομικά κείμενα διατίθενται προς το παρόν στα αγγλικά.</span></p>
         <div class="quick-jump" aria-label="Legal document shortcuts">
-          <a href="#terms">Terms</a><a href="#privacy">Privacy</a><a href="#medical">Medical Disclaimer</a><a href="#key-points">Key Points</a><a href="#security">Security</a><a href="#retention">Retention</a>
+          <a href="#company"><span class="l-en">Company Disclosure</span><span class="l-gr">Στοιχεία Εταιρείας</span></a><a href="#terms"><span class="l-en">Terms</span><span class="l-gr">Όροι</span></a><a href="#privacy"><span class="l-en">Privacy</span><span class="l-gr">Απόρρητο</span></a><a href="#medical"><span class="l-en">Medical Disclaimer</span><span class="l-gr">Ιατρική Αποποίηση</span></a><a href="#key-points"><span class="l-en">Key Points</span><span class="l-gr">Βασικά Σημεία</span></a><a href="#security"><span class="l-en">Security</span><span class="l-gr">Ασφάλεια</span></a><a href="#retention"><span class="l-en">Retention</span><span class="l-gr">Διατήρηση</span></a>
         </div>
       </div>
     </section>
     <section class="legal-shell">
       <div class="container">
 
+      <details class="legal-card reveal" id="company" open>
+        <summary>
+          <span class="legal-label"><span class="l-en">CORPORATE DISCLOSURE</span><span class="l-gr">ΕΤΑΙΡΙΚΗ ΔΙΑΦΑΝΕΙΑ</span></span>
+          <span class="legal-title"><span class="l-en">Company Information</span><span class="l-gr">Στοιχεία Εταιρείας</span></span>
+          <span class="legal-date"><span class="l-en">Article 47, Greek Law 4072/2012</span><span class="l-gr">Άρθρο 47 Ν. 4072/2012</span></span>
+          <span class="legal-plus" aria-hidden="true">+</span>
+        </summary>
+        <div class="legal-content">
+          <p><span class="l-en">The following information is published pursuant to Article 47 of Greek Law 4072/2012 on corporate transparency.</span><span class="l-gr">Τα ακόλουθα στοιχεία δημοσιεύονται σύμφωνα με το άρθρο 47 του Ν. 4072/2012 περί εταιρικής διαφάνειας.</span></p>
+          <div class="disclosure-grid">
+            <div class="disclosure-key"><span class="l-gr">Επωνυμία</span><span class="l-en">Company name</span></div>
+            <div class="disclosure-val"><span class="l-gr">OMNIDERMA ΜΟΝΟΠΡΟΣΩΠΗ Ι.Κ.Ε.</span><span class="l-en">OMNIDERMA SINGLE MEMBER P.C.</span></div>
+            <div class="disclosure-key"><span class="l-gr">Διακριτικός τίτλος</span><span class="l-en">Distinctive title</span></div>
+            <div class="disclosure-val">OmniDerma</div>
+            <div class="disclosure-key"><span class="l-gr">Νομική μορφή</span><span class="l-en">Legal form</span></div>
+            <div class="disclosure-val"><span class="l-gr">Μονοπρόσωπη Ιδιωτική Κεφαλαιουχική Εταιρεία</span><span class="l-en">Single Member Private Company (I.K.E. / P.C.)</span></div>
+            <div class="disclosure-key"><span class="l-gr">Αριθμός Γ.Ε.ΜΗ.</span><span class="l-en">G.E.MI. registration no.</span></div>
+            <div class="disclosure-val">194870416000</div>
+            <div class="disclosure-key"><span class="l-gr">EUID</span><span class="l-en">European Unique Identifier</span></div>
+            <div class="disclosure-val">ELGEMI.194870416000</div>
+            <div class="disclosure-key"><span class="l-gr">Α.Φ.Μ.</span><span class="l-en">Tax ID (VAT no.)</span></div>
+            <div class="disclosure-val">803337704</div>
+            <div class="disclosure-key"><span class="l-gr">Αρμόδια Δ.Ο.Υ.</span><span class="l-en">Competent tax office</span></div>
+            <div class="disclosure-val"><span class="l-gr">Δ.Ο.Υ. Αιγίου</span><span class="l-en">Tax Office of Aigio</span></div>
+            <div class="disclosure-key"><span class="l-gr">Αρμόδια Υπηρεσία Γ.Ε.ΜΗ.</span><span class="l-en">Competent G.E.MI. service</span></div>
+            <div class="disclosure-val"><span class="l-gr">Επιμελητήριο Αχαΐας</span><span class="l-en">Chamber of Achaia</span></div>
+            <div class="disclosure-key"><span class="l-gr">Έδρα &amp; διεύθυνση</span><span class="l-en">Registered seat &amp; address</span></div>
+            <div class="disclosure-val"><span class="l-gr">Ανώνυμη Οδός 0, 25100 Μελίσσια, Ελλάδα</span><span class="l-en">Anonymi Odos 0, 25100 Melissia, Greece</span></div>
+            <div class="disclosure-key"><span class="l-gr">Εταιρικό κεφάλαιο</span><span class="l-en">Share capital</span></div>
+            <div class="disclosure-val"><span class="l-gr">€5.000,00 — ολοσχερώς καταβεβλημένο</span><span class="l-en">€5,000.00 — fully paid up</span></div>
+            <div class="disclosure-key"><span class="l-gr">Εγγυητικές εισφορές</span><span class="l-en">Guarantee contributions</span></div>
+            <div class="disclosure-val">€0,00</div>
+            <div class="disclosure-key"><span class="l-gr">Μοναδικός εταίρος</span><span class="l-en">Sole member</span></div>
+            <div class="disclosure-val"><span class="l-gr">Περικλής Σπηλιόπουλος — Κεφαλαιακή εισφορά €5.000,00 (100%). Διεύθυνση: η έδρα της εταιρείας.</span><span class="l-en">Periklis Spiliopoulos — Capital contribution €5,000.00 (100%). Address: the company's registered seat.</span></div>
+            <div class="disclosure-key"><span class="l-gr">Διαχειριστής</span><span class="l-en">Managing Director</span></div>
+            <div class="disclosure-val"><span class="l-gr">Περικλής Σπηλιόπουλος</span><span class="l-en">Periklis Spiliopoulos</span></div>
+            <div class="disclosure-key"><span class="l-gr">Κατάσταση</span><span class="l-en">Status</span></div>
+            <div class="disclosure-val"><span class="l-gr">Η εταιρεία δεν τελεί υπό εκκαθάριση.</span><span class="l-en">The company is not in liquidation.</span></div>
+            <div class="disclosure-key"><span class="l-gr">Ιστοσελίδα</span><span class="l-en">Website</span></div>
+            <div class="disclosure-val">www.omniderma.health</div>
+            <div class="disclosure-key"><span class="l-gr">Επικοινωνία</span><span class="l-en">Contact</span></div>
+            <div class="disclosure-val"><a href="mailto:info@omniderma.health" style="color:var(--accent-light); text-decoration:none;">info@omniderma.health</a></div>
+          </div>
+          <p class="disclosure-note"><span class="l-en">The company's annual financial statements will be published on this page as required by law.</span><span class="l-gr">Οι ετήσιες οικονομικές καταστάσεις της εταιρείας θα αναρτώνται στην παρούσα σελίδα σύμφωνα με τον νόμο.</span></p>
+        </div>
+      </details>
+
       <details class="legal-card reveal" id="terms" open>
         <summary>
-          <span class="legal-label">PLATFORM TERMS</span>
-          <span class="legal-title">Terms of Service</span>
-          <span class="legal-date">Last updated: May 18, 2026</span>
+          <span class="legal-label"><span class="l-en">PLATFORM TERMS</span><span class="l-gr">ΟΡΟΙ ΠΛΑΤΦΟΡΜΑΣ</span></span>
+          <span class="legal-title"><span class="l-en">Terms of Service</span><span class="l-gr">Όροι Χρήσης</span></span>
+          <span class="legal-date"><span class="l-en">Last updated: May 18, 2026</span><span class="l-gr">Τελευταία ενημέρωση: 18 Μαΐου 2026</span></span>
           <span class="legal-plus" aria-hidden="true">+</span>
         </summary>
         <div class="legal-content">
@@ -230,9 +291,9 @@ Website: omniderma.health</li></ul>
       </details>
       <details class="legal-card reveal" id="privacy">
         <summary>
-          <span class="legal-label">DATA &amp; GDPR</span>
-          <span class="legal-title">Privacy Policy</span>
-          <span class="legal-date">Last updated: May 18, 2026</span>
+          <span class="legal-label"><span class="l-en">DATA &amp; GDPR</span><span class="l-gr">ΔΕΔΟΜΕΝΑ &amp; GDPR</span></span>
+          <span class="legal-title"><span class="l-en">Privacy Policy</span><span class="l-gr">Πολιτική Απορρήτου</span></span>
+          <span class="legal-date"><span class="l-en">Last updated: May 18, 2026</span><span class="l-gr">Τελευταία ενημέρωση: 18 Μαΐου 2026</span></span>
           <span class="legal-plus" aria-hidden="true">+</span>
         </summary>
         <div class="legal-content">
@@ -391,9 +452,9 @@ Website: omniderma.health</li></ul>
       </details>
       <details class="legal-card reveal" id="medical">
         <summary>
-          <span class="legal-label">CLINICAL SAFETY</span>
-          <span class="legal-title">Medical Disclaimer</span>
-          <span class="legal-date">Last updated: May 18, 2026</span>
+          <span class="legal-label"><span class="l-en">CLINICAL SAFETY</span><span class="l-gr">ΚΛΙΝΙΚΗ ΑΣΦΑΛΕΙΑ</span></span>
+          <span class="legal-title"><span class="l-en">Medical Disclaimer</span><span class="l-gr">Ιατρική Αποποίηση Ευθύνης</span></span>
+          <span class="legal-date"><span class="l-en">Last updated: May 18, 2026</span><span class="l-gr">Τελευταία ενημέρωση: 18 Μαΐου 2026</span></span>
           <span class="legal-plus" aria-hidden="true">+</span>
         </summary>
         <div class="legal-content">
@@ -459,9 +520,9 @@ Website: omniderma.health</li></ul>
       </details>
       <details class="legal-card reveal" id="key-points">
         <summary>
-          <span class="legal-label">ONBOARDING SUMMARY</span>
-          <span class="legal-title">Key Points Before Using OmniDerma</span>
-          <span class="legal-date">Last updated: May 18, 2026</span>
+          <span class="legal-label"><span class="l-en">ONBOARDING SUMMARY</span><span class="l-gr">ΣΥΝΟΨΗ ΕΝΤΑΞΗΣ</span></span>
+          <span class="legal-title"><span class="l-en">Key Points Before Using OmniDerma</span><span class="l-gr">Βασικά Σημεία Πριν τη Χρήση του OmniDerma</span></span>
+          <span class="legal-date"><span class="l-en">Last updated: May 18, 2026</span><span class="l-gr">Τελευταία ενημέρωση: 18 Μαΐου 2026</span></span>
           <span class="legal-plus" aria-hidden="true">+</span>
         </summary>
         <div class="legal-content">
@@ -518,9 +579,9 @@ Website: omniderma.health</li></ul>
       </details>
       <details class="legal-card reveal" id="security">
         <summary>
-          <span class="legal-label">SECURITY</span>
-          <span class="legal-title">Security &amp; Responsible Use</span>
-          <span class="legal-date">Last updated: May 18, 2026</span>
+          <span class="legal-label"><span class="l-en">SECURITY</span><span class="l-gr">ΑΣΦΑΛΕΙΑ</span></span>
+          <span class="legal-title"><span class="l-en">Security &amp; Responsible Use</span><span class="l-gr">Ασφάλεια &amp; Υπεύθυνη Χρήση</span></span>
+          <span class="legal-date"><span class="l-en">Last updated: May 18, 2026</span><span class="l-gr">Τελευταία ενημέρωση: 18 Μαΐου 2026</span></span>
           <span class="legal-plus" aria-hidden="true">+</span>
         </summary>
         <div class="legal-content">
@@ -595,9 +656,9 @@ Website: omniderma.health</li></ul>
       </details>
       <details class="legal-card reveal" id="retention">
         <summary>
-          <span class="legal-label">RETENTION</span>
-          <span class="legal-title">Data Retention Policy</span>
-          <span class="legal-date">Last updated: May 18, 2026</span>
+          <span class="legal-label"><span class="l-en">RETENTION</span><span class="l-gr">ΔΙΑΤΗΡΗΣΗ</span></span>
+          <span class="legal-title"><span class="l-en">Data Retention Policy</span><span class="l-gr">Πολιτική Διατήρησης Δεδομένων</span></span>
+          <span class="legal-date"><span class="l-en">Last updated: May 18, 2026</span><span class="l-gr">Τελευταία ενημέρωση: 18 Μαΐου 2026</span></span>
           <span class="legal-plus" aria-hidden="true">+</span>
         </summary>
         <div class="legal-content">
@@ -671,16 +732,31 @@ Website: omniderma.health</li></ul>
         </div>
       </details>
         <div class="notice">
-          <strong>Questions regarding legal or privacy matters?</strong>
-          Contact: <a href="mailto:info@omniderma.health" style="color:var(--accent-light);">info@omniderma.health</a>
+          <strong><span class="l-en">Questions regarding legal or privacy matters?</span><span class="l-gr">Ερωτήσεις για νομικά θέματα ή θέματα απορρήτου;</span></strong>
+          <span class="l-en">Contact:</span><span class="l-gr">Επικοινωνία:</span> <a href="mailto:info@omniderma.health" style="color:var(--accent-light);">info@omniderma.health</a>
         </div>
       </div>
     </section>
   </main>
   <footer>
     <div class="footer-brand"><img src="../omniderma-logo.png" alt="OmniDerma footer logo" /></div>
-    <div>© 2026 OmniDerma. All rights reserved.</div>
-    <div class="footer-meta">Physician-led · AI-assisted</div>
+    <div><span class="l-en">© 2026 OmniDerma. All rights reserved.</span><span class="l-gr">© 2026 OmniDerma. Με επιφύλαξη παντός δικαιώματος.</span></div>
+    <div class="footer-meta"><span class="l-en">Physician-led · AI-assisted</span><span class="l-gr">Με ιατρική καθοδήγηση · Υποβοήθηση AI</span></div>
   </footer>
+  <script>
+    function setLanguage(lang) {
+      document.body.dataset.lang = lang;
+      document.documentElement.lang = lang === "gr" ? "el" : "en";
+      try { localStorage.setItem("omniderma-lang", lang); } catch (e) {}
+      document.querySelectorAll(".lang-toggle button").forEach(btn => btn.classList.remove("active"));
+      const activeBtn = document.getElementById("lang-" + lang);
+      if (activeBtn) activeBtn.classList.add("active");
+    }
+    document.getElementById("lang-en")?.addEventListener("click", () => setLanguage("en"));
+    document.getElementById("lang-gr")?.addEventListener("click", () => setLanguage("gr"));
+    let savedLang = "en";
+    try { savedLang = localStorage.getItem("omniderma-lang") || "en"; } catch (e) {}
+    setLanguage(savedLang);
+  </script>
 </body>
 </html>
