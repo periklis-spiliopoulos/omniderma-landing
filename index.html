@@ -612,6 +612,133 @@
       font-size: .9rem;
       line-height: 1.72;
     }
+    .core-feature {
+      margin-top: 2rem;
+      padding: clamp(1.4rem, 3vw, 2rem);
+      border: 1px solid var(--accent-border);
+      border-radius: 26px;
+      background: linear-gradient(130deg, rgba(124,92,191,.12), rgba(124,92,191,.035) 60%, rgba(255,255,255,.02));
+    }
+    .core-invite {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding-bottom: 1.7rem;
+      border-bottom: 1px solid var(--accent-border);
+    }
+    .core-invite-copy { max-width: 680px; }
+    .core-invite h3 {
+      margin: 0 0 .35rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.65rem, 2.5vw, 2rem);
+      font-weight: 400;
+      line-height: 1.2;
+    }
+    .core-invite p {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: .92rem;
+      line-height: 1.7;
+    }
+    .core-invite .btn { flex-shrink: 0; }
+    .core-carousel {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(0, 1fr);
+      gap: clamp(1.5rem, 4vw, 3rem);
+      align-items: center;
+      padding-top: 1.7rem;
+    }
+    .core-carousel-stage {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      border: 1px solid var(--accent-border);
+      border-radius: 22px;
+      background: radial-gradient(circle at 50% 35%, rgba(124,92,191,.18), rgba(124,92,191,.035) 65%, transparent);
+    }
+    .core-carousel-preview {
+      display: block;
+      height: min(64vh, 540px);
+      aspect-ratio: 807 / 1801;
+      padding: 0;
+      overflow: hidden;
+      border: 5px solid #252532;
+      border-radius: 24px;
+      background: #fff;
+      box-shadow: 0 20px 50px rgba(0,0,0,.35);
+      cursor: zoom-in;
+    }
+    .core-carousel-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .core-carousel-content { min-width: 0; }
+    .core-carousel-index {
+      margin: 0 0 1rem;
+      color: var(--text-faint);
+      font-family: 'DM Mono', monospace;
+      font-size: .78rem;
+      letter-spacing: .16em;
+    }
+    .core-carousel h3 {
+      margin: 0 0 .75rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3vw, 2.75rem);
+      font-weight: 400;
+      line-height: 1.1;
+    }
+    .core-carousel-description {
+      max-width: 430px;
+      margin: 0;
+      color: var(--text-soft);
+      font-size: .96rem;
+      line-height: 1.8;
+    }
+    .core-carousel-hint {
+      margin: 1.15rem 0 0;
+      color: var(--text-faint);
+      font-size: .78rem;
+    }
+    .core-carousel-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: .6rem;
+      margin-top: 2rem;
+    }
+    .core-carousel-controls button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 50%;
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+      cursor: pointer;
+      transition: border-color .2s ease, background .2s ease;
+    }
+    .core-carousel-controls button:hover,
+    .core-carousel-controls button:focus-visible {
+      border-color: var(--accent-light);
+      background: rgba(124,92,191,.14);
+    }
+    .core-carousel-dots { display: flex; gap: .45rem; margin-left: .5rem; }
+    .core-carousel-dots button {
+      width: 32px;
+      height: 32px;
+      font-family: 'DM Mono', monospace;
+      font-size: .68rem;
+    }
+    .core-carousel-dots button[aria-current="true"] {
+      border-color: var(--accent-light);
+      background: rgba(124,92,191,.22);
+      color: var(--accent-light);
+    }
 
     #contact {
       --accent: #7c5cbf; --accent-light: #a688e0; --accent-border: rgba(124,92,191,.28);
@@ -701,6 +828,8 @@
       position: absolute;
       top: 20px;
       right: 28px;
+      border: 0;
+      background: transparent;
       font-size: 42px;
       line-height: 1;
       color: white;
@@ -797,6 +926,15 @@
         padding-left: 1.2rem;
         padding-right: 1.2rem;
       }
+    }
+
+    @media (max-width: 760px) {
+      .core-carousel { grid-template-columns: 1fr; }
+      .core-carousel-stage { padding: 1.1rem; }
+    }
+
+    @media (max-width: 640px) {
+      .core-invite { flex-direction: column; align-items: flex-start; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1027,6 +1165,41 @@
           <p id="w4-d">Interpret the results in clinical context, compare over time, and save the case workflow.</p>
         </article>
       </div>
+      <div class="core-feature reveal">
+        <div class="core-invite">
+          <div class="core-invite-copy">
+            <h3 id="core-invite-title">Try OmniDerma Core for free.</h3>
+            <p id="core-invite-text">For a limited time, explore the platform at no cost and see how it fits your clinical workflow.</p>
+          </div>
+          <a href="mailto:info@omniderma.health?subject=OmniDerma%20Core%20Free%20Access" class="btn btn-primary" id="core-invite-cta">Request free access</a>
+        </div>
+        <div class="core-carousel" id="core-carousel" role="region" aria-roledescription="carousel" aria-label="OmniDerma Core screenshots" tabindex="0">
+          <div class="core-carousel-stage">
+            <button class="core-carousel-preview" id="core-carousel-preview" type="button" aria-label="Enlarge Core screenshot">
+              <img id="core-carousel-image" src="core-screens/en-home.jpg" alt="OmniDerma Core home screen with Analyze Case and Clinical Assistant options" width="807" height="1801" loading="lazy" decoding="async">
+            </button>
+          </div>
+          <div class="core-carousel-content">
+            <p class="section-tag" id="core-carousel-tag">Inside OmniDerma Core</p>
+            <p class="core-carousel-index" aria-live="polite"><span id="core-carousel-current">01</span> / 04</p>
+            <div aria-live="polite">
+              <h3 id="core-carousel-title">Choose where to start.</h3>
+              <p class="core-carousel-description" id="core-carousel-description">Start with case analysis or open the clinical assistant from one clear home screen.</p>
+            </div>
+            <p class="core-carousel-hint" id="core-carousel-hint">Tap the screenshot to enlarge it.</p>
+            <div class="core-carousel-controls">
+              <button id="core-carousel-prev" type="button" aria-label="Previous Core screenshot">&#8592;</button>
+              <button id="core-carousel-next" type="button" aria-label="Next Core screenshot">&#8594;</button>
+              <div class="core-carousel-dots" aria-label="Choose a Core screenshot">
+                <button type="button" data-core-slide="0" aria-label="Show screenshot 1 of 4" aria-current="true">01</button>
+                <button type="button" data-core-slide="1" aria-label="Show screenshot 2 of 4" aria-current="false">02</button>
+                <button type="button" data-core-slide="2" aria-label="Show screenshot 3 of 4" aria-current="false">03</button>
+                <button type="button" data-core-slide="3" aria-label="Show screenshot 4 of 4" aria-current="false">04</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1144,7 +1317,7 @@
 
 
   <div id="image-modal" class="image-modal" aria-hidden="true">
-    <span class="close" aria-label="Close image preview">&times;</span>
+    <button class="close" type="button" aria-label="Close image preview">&times;</button>
     <img class="modal-content" id="modal-img" alt="Expanded OmniDerma screenshot" />
   </div>
 
@@ -1177,36 +1350,39 @@
     const modal = document.getElementById('image-modal');
     const modalImg = document.getElementById('modal-img');
     const modalClose = document.querySelector('.image-modal .close');
+    let imagePreviewReturnFocus = null;
 
-    document.querySelectorAll('.screenshot').forEach(img => {
-      img.addEventListener('click', () => {
-        modal.classList.add('open');
-        modal.setAttribute('aria-hidden', 'false');
-        modalImg.src = img.src;
-        modalImg.alt = img.alt || 'Expanded OmniDerma screenshot';
-      });
-    });
+    function openImagePreview(img) {
+      imagePreviewReturnFocus = document.activeElement;
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      modalImg.src = img.src;
+      modalImg.alt = img.alt || 'Expanded OmniDerma screenshot';
+      modalClose.focus();
+    }
 
-    modalClose.addEventListener('click', () => {
+    function closeImagePreview() {
       modal.classList.remove('open');
       modal.setAttribute('aria-hidden', 'true');
       modalImg.src = '';
+      imagePreviewReturnFocus?.focus?.();
+    }
+
+    document.querySelectorAll('.screenshot').forEach(img => {
+      img.addEventListener('click', () => openImagePreview(img));
+    });
+    document.getElementById('core-carousel-preview').addEventListener('click', () => {
+      openImagePreview(document.getElementById('core-carousel-image'));
     });
 
+    modalClose.addEventListener('click', closeImagePreview);
+
     modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.classList.remove('open');
-        modal.setAttribute('aria-hidden', 'true');
-        modalImg.src = '';
-      }
+      if (e.target === modal) closeImagePreview();
     });
 
     window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal.classList.contains('open')) {
-        modal.classList.remove('open');
-        modal.setAttribute('aria-hidden', 'true');
-        modalImg.src = '';
-      }
+      if (e.key === 'Escape' && modal.classList.contains('open')) closeImagePreview();
     });
 
 
@@ -1284,6 +1460,9 @@
         w3D: "OmniDerma processes visual and contextual information into structured support output.",
         w4T: "Review & document",
         w4D: "Interpret the results in clinical context, compare over time, and save the case workflow.",
+        coreInviteTitle: "Try OmniDerma Core for free.",
+        coreInviteText: "For a limited time, explore the platform at no cost and see how it fits your clinical workflow.",
+        coreInviteCta: "Request free access",
 
         contactTag: "Get in touch",
         contactTitle: "Interested in a demo,<br><em>partnership, or collaboration?</em>",
@@ -1377,6 +1556,9 @@
         w3D: "Το OmniDerma επεξεργάζεται την εικόνα και το κλινικό πλαίσιο και τα μετατρέπει σε δομημένο υποστηρικτικό αποτέλεσμα.",
         w4T: "Αξιολόγηση & καταγραφή",
         w4D: "Ερμήνευσε τα αποτελέσματα μέσα στο κλινικό πλαίσιο, σύγκρινέ τα διαχρονικά και αποθήκευσε τη ροή του περιστατικού.",
+        coreInviteTitle: "Δοκίμασε το OmniDerma Core δωρεάν.",
+        coreInviteText: "Για περιορισμένο διάστημα, γνώρισε την πλατφόρμα χωρίς κόστος και δες πώς ταιριάζει στην κλινική σου ροή εργασίας.",
+        coreInviteCta: "Ζήτησε δωρεάν πρόσβαση",
 
         contactTag: "Επικοινωνία",
         contactTitle: "Ενδιαφέρεσαι για demo,<br><em>συνεργασία ή συνέργεια;</em>",
@@ -1397,6 +1579,89 @@
         footerMeta: "Physician-led · AI-assisted"
       }
     };
+
+    const coreSlides = [
+      {
+        image: { en: 'core-screens/en-home.jpg', gr: 'core-screens/el-home.jpg' },
+        title: { en: 'Choose where to start.', gr: 'Διάλεξε από πού θα ξεκινήσεις.' },
+        description: {
+          en: 'Start with case analysis or open the clinical assistant from one clear home screen.',
+          gr: 'Επίλεξε αν θα αναλύσεις περιστατικό ή θα ανοίξεις τον κλινικό βοηθό από μία καθαρή αρχική οθόνη.'
+        },
+        alt: {
+          en: 'OmniDerma Core home screen with Analyze Case and Clinical Assistant options',
+          gr: 'Αρχική οθόνη του OmniDerma Core με επιλογές Ανάλυση περιστατικού και Κλινικός βοηθός'
+        }
+      },
+      {
+        image: { en: 'core-screens/en-case.jpg', gr: 'core-screens/el-case.jpg' },
+        title: { en: 'Add the clinical context.', gr: 'Πρόσθεσε το κλινικό πλαίσιο.' },
+        description: {
+          en: 'Upload images and add relevant details before running a case analysis.',
+          gr: 'Ανέβασε εικόνες και πρόσθεσε τις χρήσιμες πληροφορίες πριν από την ανάλυση.'
+        },
+        alt: {
+          en: 'OmniDerma Core case analysis form with an uploaded image and clinical context',
+          gr: 'Φόρμα ανάλυσης περιστατικού του OmniDerma Core με εικόνες και κλινικό πλαίσιο'
+        }
+      },
+      {
+        image: { en: 'core-screens/en-results.jpg', gr: 'core-screens/el-results.jpg' },
+        title: { en: 'Review ranked possibilities.', gr: 'Δες δομημένα αποτελέσματα.' },
+        description: {
+          en: 'See a structured list of possible diagnoses to review in clinical context.',
+          gr: 'Δες μια δομημένη λίστα πιθανών διαγνώσεων για αξιολόγηση μέσα στο κλινικό πλαίσιο.'
+        },
+        alt: {
+          en: 'OmniDerma Core result showing a ranked list of possible diagnoses',
+          gr: 'Αποτελέσματα του OmniDerma Core με κατάταξη πιθανών διαγνώσεων'
+        }
+      },
+      {
+        image: { en: 'core-screens/en-assistant.jpg', gr: 'core-screens/el-assistant.jpg' },
+        title: { en: 'Keep exploring the case.', gr: 'Συνέχισε τη διερεύνηση.' },
+        description: {
+          en: 'Ask a focused question with images and case history in the clinical assistant.',
+          gr: 'Κάνε μια στοχευμένη ερώτηση στον κλινικό βοηθό, με εικόνες και ιστορικό.'
+        },
+        alt: {
+          en: 'OmniDerma Core Clinical Assistant with an image, case history, and question',
+          gr: 'Κλινικός βοηθός του OmniDerma Core με εικόνες, ιστορικό και ερώτηση'
+        }
+      }
+    ];
+
+    const coreCarousel = document.getElementById('core-carousel');
+    const coreCarouselImage = document.getElementById('core-carousel-image');
+    const coreCarouselDots = [...document.querySelectorAll('[data-core-slide]')];
+    let coreSlideIndex = 0;
+    let coreLanguage = 'en';
+
+    function renderCoreSlide() {
+      const slide = coreSlides[coreSlideIndex];
+      coreCarouselImage.src = slide.image[coreLanguage];
+      coreCarouselImage.alt = slide.alt[coreLanguage];
+      document.getElementById('core-carousel-current').textContent = String(coreSlideIndex + 1).padStart(2, '0');
+      document.getElementById('core-carousel-title').textContent = slide.title[coreLanguage];
+      document.getElementById('core-carousel-description').textContent = slide.description[coreLanguage];
+      document.getElementById('core-carousel-tag').textContent = coreLanguage === 'gr' ? 'Μέσα στο OmniDerma Core' : 'Inside OmniDerma Core';
+      document.getElementById('core-carousel-hint').textContent = coreLanguage === 'gr' ? 'Πάτησε την εικόνα για μεγέθυνση.' : 'Tap the screenshot to enlarge it.';
+      coreCarousel.setAttribute('aria-label', coreLanguage === 'gr' ? 'Εικόνες του OmniDerma Core' : 'OmniDerma Core screenshots');
+      document.getElementById('core-carousel-preview').setAttribute('aria-label', coreLanguage === 'gr' ? 'Μεγέθυνση εικόνας του OmniDerma Core' : 'Enlarge Core screenshot');
+      document.getElementById('core-carousel-prev').setAttribute('aria-label', coreLanguage === 'gr' ? 'Προηγούμενη εικόνα του Core' : 'Previous Core screenshot');
+      document.getElementById('core-carousel-next').setAttribute('aria-label', coreLanguage === 'gr' ? 'Επόμενη εικόνα του Core' : 'Next Core screenshot');
+      document.querySelector('.core-carousel-dots').setAttribute('aria-label', coreLanguage === 'gr' ? 'Επιλογή εικόνας του Core' : 'Choose a Core screenshot');
+      modalClose.setAttribute('aria-label', coreLanguage === 'gr' ? 'Κλείσιμο προεπισκόπησης εικόνας' : 'Close image preview');
+      coreCarouselDots.forEach((dot, index) => {
+        dot.setAttribute('aria-current', String(index === coreSlideIndex));
+        dot.setAttribute('aria-label', coreLanguage === 'gr' ? `Προβολή εικόνας ${index + 1} από ${coreSlides.length}` : `Show screenshot ${index + 1} of ${coreSlides.length}`);
+      });
+    }
+
+    function moveCoreSlide(direction) {
+      coreSlideIndex = (coreSlideIndex + direction + coreSlides.length) % coreSlides.length;
+      renderCoreSlide();
+    }
 
     function setText(id, value) {
       const el = document.getElementById(id);
@@ -1481,6 +1746,11 @@
       setText("w3-d", t.w3D);
       setText("w4-t", t.w4T);
       setText("w4-d", t.w4D);
+      setText("core-invite-title", t.coreInviteTitle);
+      setText("core-invite-text", t.coreInviteText);
+      setText("core-invite-cta", t.coreInviteCta);
+      coreLanguage = lang;
+      renderCoreSlide();
 
       setText("contact-tag", t.contactTag);
       setHTML("contact-title", t.contactTitle);
@@ -1505,6 +1775,37 @@
       const activeBtn = document.getElementById(`lang-${lang}`);
       if (activeBtn) activeBtn.classList.add("active");
     }
+
+    document.getElementById('core-carousel-prev').addEventListener('click', () => moveCoreSlide(-1));
+    document.getElementById('core-carousel-next').addEventListener('click', () => moveCoreSlide(1));
+    coreCarouselDots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        coreSlideIndex = index;
+        renderCoreSlide();
+      });
+    });
+    coreCarousel.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+        event.preventDefault();
+        moveCoreSlide(event.key === 'ArrowRight' ? 1 : -1);
+      }
+    });
+
+    let coreTouchStart = null;
+    coreCarousel.addEventListener('touchstart', (event) => {
+      if (event.touches.length === 1) {
+        coreTouchStart = { x: event.touches[0].clientX, y: event.touches[0].clientY };
+      }
+    }, { passive: true });
+    coreCarousel.addEventListener('touchend', (event) => {
+      if (!coreTouchStart) return;
+      const deltaX = event.changedTouches[0].clientX - coreTouchStart.x;
+      const deltaY = event.changedTouches[0].clientY - coreTouchStart.y;
+      coreTouchStart = null;
+      if (Math.abs(deltaX) > 50 && Math.abs(deltaX) > Math.abs(deltaY) * 1.2) {
+        moveCoreSlide(deltaX < 0 ? 1 : -1);
+      }
+    }, { passive: true });
 
     document.getElementById("lang-en")?.addEventListener("click", () => setLanguage("en"));
     document.getElementById("lang-gr")?.addEventListener("click", () => setLanguage("gr"));
