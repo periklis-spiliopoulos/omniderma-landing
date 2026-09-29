@@ -258,11 +258,11 @@
     }
     .core-promo-copy h2 {
       margin: 0;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.2rem, 4vw, 3.55rem);
-      font-weight: 400;
-      line-height: 1;
-      letter-spacing: -.02em;
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2.05rem, 3.5vw, 3rem);
+      font-weight: 500;
+      line-height: 1.05;
+      letter-spacing: -.025em;
       color: #17141b;
     }
     .core-promo-copy p {
@@ -1056,14 +1056,40 @@
     }
 
     @media (max-width: 760px) {
-      .core-promo-panel { grid-template-columns: 1fr; }
-      .core-promo-copy { padding: 1.4rem 1.4rem 1.15rem; }
-      .core-promo-copy h2 { font-size: clamp(2rem, 10vw, 2.7rem); }
-      .core-promo-copy p { font-size: .96rem; }
-      .core-promo-cta { margin-top: 1.1rem; }
-      .core-promo-visual { padding: .45rem 1.4rem 1.4rem; }
-      .core-promo-window { width: min(100%, 120px); }
-      .core-promo-screen { height: 150px; }
+      .core-promo-panel {
+        grid-template-columns: minmax(0, 1fr) 104px;
+        min-height: 0;
+      }
+      .core-promo-copy { padding: 1.25rem .45rem 1.25rem 1.25rem; }
+      .core-promo-copy h2 { font-size: clamp(1.35rem, 6.2vw, 1.7rem); }
+      .core-promo-copy p {
+        margin-top: .5rem;
+        font-size: .82rem;
+        line-height: 1.45;
+      }
+      .core-promo-cta {
+        min-height: 42px;
+        margin-top: .9rem;
+        padding: .72rem .85rem;
+        font-size: .66rem;
+        letter-spacing: .08em;
+        white-space: nowrap;
+      }
+      .core-promo-visual {
+        justify-content: flex-end;
+        margin: 0;
+        padding: .75rem .75rem .75rem 0;
+      }
+      .core-promo-window {
+        width: min(100%, 92px);
+        padding: 4px;
+        border-radius: 10px;
+      }
+      .core-promo-screen {
+        height: 126px;
+        border-radius: 6px;
+      }
+      .core-promo-screen img { border-radius: 5px; }
       #hero { min-height: auto; padding-top: 3.75rem; }
       .core-carousel { grid-template-columns: 1fr; }
       .core-carousel-stage { padding: 1.1rem; }
