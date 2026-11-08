@@ -109,7 +109,11 @@ test("persisted measurement initializes one tag with all four consent signals be
     ad_storage: "granted", analytics_storage: "granted",
     ad_user_data: "granted", ad_personalization: "denied"
   }]);
-  assert.deepEqual(commands[3], ["config", "AW-18422990044", { allow_ad_personalization_signals: false }]);
+  assert.deepEqual(commands[3], ["config", "AW-18422990044", {
+    allow_ad_personalization_signals: false,
+    allow_enhanced_conversions: false,
+    user_data: {}
+  }]);
   assert.equal(p.scripts.length, 1);
   assert.equal(p.scripts[0].src, "https://www.googletagmanager.com/gtag/js?id=AW-18422990044");
   assert.equal(p.events().length, 0);
@@ -118,14 +122,16 @@ test("persisted measurement initializes one tag with all four consent signals be
   assert.equal(p.commands().filter(args => args[0] === "config").length, 1);
 });
 
-test("each intentional CTA activation queues exactly its own conversion with only send_to", () => {
+test("each intentional CTA activation queues only its conversion and opts out of user data", () => {
   const p = page({ choice: "measurement" });
   for (const [id, label] of [["core-promo-cta", coreLabel], ["contact-cta", demoLabel]]) {
     const before = p.events().length;
     const event = p.elements.get(id).click({ target: { tagName: "SPAN" } });
     assert.equal(event.defaultPrevented, false);
     assert.equal(p.events().length, before + 1, "nested content must not cause duplicate conversions");
-    assert.deepEqual(JSON.parse(JSON.stringify(p.events().at(-1))), ["event", "conversion", { send_to: label }]);
+    assert.deepEqual(JSON.parse(JSON.stringify(p.events().at(-1))), ["event", "conversion", {
+      send_to: label, user_data: {}
+    }]);
     assert.equal(p.elements.get(id).listeners.click[0].options.passive, true);
   }
   assert.equal(p.window.location.href, "https://www.omniderma.health/?gclid=test-click-id");

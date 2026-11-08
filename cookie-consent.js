@@ -101,8 +101,12 @@
         }
 
         try {
-          // A click is not a submitted lead. Send no value, currency, or email data.
-          window.gtag("event", "conversion", { send_to: conversions[id] });
+          // Override account-side automatic user-data collection for these clicks.
+          // A click is not a submitted lead; send no value, currency, or email data.
+          window.gtag("event", "conversion", {
+            send_to: conversions[id],
+            user_data: {}
+          });
         } catch (error) {
           // Tracking failures must never interfere with the native mailto action.
         }
@@ -169,7 +173,9 @@
 
     window.gtag("js", new Date());
     window.gtag("config", GOOGLE_TAG_ID, {
-      allow_ad_personalization_signals: false
+      allow_ad_personalization_signals: false,
+      allow_enhanced_conversions: false,
+      user_data: {}
     });
   }
 
