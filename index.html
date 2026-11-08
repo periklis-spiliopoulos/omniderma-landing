@@ -2018,14 +2018,6 @@
     document.getElementById("lang-en")?.addEventListener("click", () => setLanguage("en"));
     document.getElementById("lang-gr")?.addEventListener("click", () => setLanguage("gr"));
 
-    document.getElementById("core-promo-cta")?.addEventListener("click", () => {
-      if (typeof window.gtag === "function") {
-        window.gtag("event", "core_request_clicked", {
-          language: document.documentElement.lang
-        });
-      }
-    });
-
     const savedLang = localStorage.getItem("omniderma-lang") || "en";
     setLanguage(savedLang);
 

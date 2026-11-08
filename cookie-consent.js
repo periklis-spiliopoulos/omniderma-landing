@@ -1,6 +1,10 @@
 (function () {
   "use strict";
 
+  // Keep consent controls and CTA listeners single even if this file is included twice.
+  if (document.documentElement.dataset.omnidermaConsentInitialized === "true") return;
+  document.documentElement.dataset.omnidermaConsentInitialized = "true";
+
   const GOOGLE_TAG_ID = "AW-18422990044";
   const STORAGE_KEY = "omniderma-consent-v1";
   const GOOGLE_TAG_SCRIPT_ID = "omniderma-google-tag";
@@ -66,6 +70,7 @@
   onDocumentReady(function () {
     createSettingsButton();
     createConsentBanner();
+    bindConversionClicks();
 
     if (!currentChoice) {
       openConsentBanner();
@@ -73,6 +78,37 @@
 
     observeLanguageChanges();
   });
+
+  function bindConversionClicks() {
+    // Labels verified against the original Google Ads snippets in Untitled.pages.
+    const conversions = {
+      "core-promo-cta": "AW-18422990044/VHqqCNynu7QdENyJ4tBE",
+      "contact-cta": "AW-18422990044/db_dCN-nu7QdENyJ4tBE"
+    };
+
+    Object.keys(conversions).forEach(function (id) {
+      const link = document.getElementById(id);
+      if (!link) return;
+
+      link.addEventListener("click", function (event) {
+        if (
+          !event.isTrusted ||
+          event.defaultPrevented ||
+          currentChoice !== "measurement" ||
+          typeof window.gtag !== "function"
+        ) {
+          return;
+        }
+
+        try {
+          // A click is not a submitted lead. Send no value, currency, or email data.
+          window.gtag("event", "conversion", { send_to: conversions[id] });
+        } catch (error) {
+          // Tracking failures must never interfere with the native mailto action.
+        }
+      }, { passive: true });
+    });
+  }
 
   function onDocumentReady(callback) {
     if (document.readyState === "loading") {
